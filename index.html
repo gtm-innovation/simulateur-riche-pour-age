@@ -1,0 +1,1298 @@
+<!-- Calculateur Êtes-vous riche pour votre âge ? — MoneyRadar -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+/* ===== CALCULATEUR RICHE POUR VOTRE ÂGE — MoneyRadar ===== */
+.mric-calc {
+  --teal:#00F5C0;--teal-dim:rgba(0,245,192,0.08);--teal-b:rgba(0,245,192,0.3);
+  --blue:#1060C4;
+  --navy:#0B1120;--navy2:#131F35;--navy3:#1A2847;
+  --light:#F4F7FF;--light2:#EAF0FF;
+  --lt:#1A2847;--lsub:#4A5D7A;--lborder:#D0DCEF;
+  --dsub:#C5D5E8;--dborder:rgba(255,255,255,0.07);
+  --green:#00F5C0;--red:#FF3B4E;--orange:#FF9F43;--gold:#FFD700;--purple:#A855F7;
+  --pattern-svg:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300F5C0' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  --glass:rgba(255,255,255,0.03);
+  --glass-border:rgba(255,255,255,0.08);
+  --glow:0 0 80px rgba(0,245,192,0.08);
+  width:100%;max-width:100%;box-sizing:border-box;overflow-x:hidden;
+}
+.mric-calc *,.mric-calc *::before,.mric-calc *::after{box-sizing:border-box}
+
+.mric-calc .inn{max-width:760px;margin:0 auto;padding:80px 24px}
+.mric-calc .inn-wide{max-width:1100px;margin:0 auto;padding:56px 24px}
+
+/* Sections */
+.mric-calc .dk{background:var(--navy);color:#EFF4FF;position:relative}
+.mric-calc .lt{background:var(--light);color:var(--lt);position:relative}
+
+.mric-calc .dk::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:
+  radial-gradient(ellipse 600px 400px at 10% 20%, rgba(0,245,192,0.03) 0%, transparent 70%),
+  radial-gradient(ellipse 500px 300px at 90% 80%, rgba(16,96,196,0.04) 0%, transparent 70%);
+  pointer-events:none}
+.mric-calc .dk>*{position:relative;z-index:1}
+
+/* Labels */
+.mric-calc .lbl{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;display:block}
+.mric-calc .lt .lbl{color:#243842}
+
+/* Titles & text */
+.mric-calc .stitle{font-size:clamp(26px,3.5vw,40px);font-weight:800;margin-bottom:20px;line-height:1.15;letter-spacing:-0.02em}
+.mric-calc .dk .stitle{background:linear-gradient(135deg,#EFF4FF 0%,#A8BDD6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mric-calc .btxt{font-size:16px;margin-bottom:18px;line-height:1.75}
+.mric-calc .dk .btxt{color:var(--dsub)}
+.mric-calc .lt .btxt{color:var(--lsub)}
+.mric-calc .btxt strong{color:#EFF4FF}
+.mric-calc .lt .btxt strong{color:var(--lt)}
+
+/* ===== HERO ===== */
+.mric-calc .mric-hero{text-align:center;position:relative;overflow:hidden;background-image:var(--pattern-svg),radial-gradient(ellipse 75% 50% at 50% 0%,rgba(0,245,192,.28) 0%,rgba(0,245,192,.10) 40%,rgba(0,245,192,.02) 65%,transparent 80%);background-color:var(--navy)}
+.mric-calc .mric-hero>*{position:relative;z-index:1}
+.mric-calc .mric-hero-logo{display:block;margin:0 auto 28px;height:32px;width:auto;opacity:.85}
+@keyframes mric-shimmer{0%{background-position:0% center}100%{background-position:200% center}}
+.mric-calc .mric-hero h1{font-size:clamp(30px,4.5vw,52px);font-weight:800;line-height:1.1;letter-spacing:-.03em;max-width:700px;margin:0 auto 20px;color:#EFF4FF}
+.mric-calc .mric-hero h1 em{font-style:normal;color:var(--teal)}
+.mric-calc .mric-hero-sub{font-size:clamp(15px,1.7vw,17px);color:#A8BDD6;max-width:560px;margin:0 auto;font-weight:400}
+.mric-calc .mric-hero .inn{padding-top:60px;padding-bottom:50px}
+
+/* ===== HOW IT WORKS ===== */
+.mric-calc .mric-how{background:var(--navy);border-bottom:1px solid var(--glass-border);position:relative}
+.mric-calc .mric-how::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse 600px 300px at 50% 100%, rgba(0,245,192,0.04) 0%, transparent 70%);pointer-events:none}
+.mric-calc .mric-how>*{position:relative;z-index:1}
+
+/* Field hints */
+.mric-calc .mric-field-hint{font-size:10px;color:#fff;margin-top:5px;line-height:1.4;font-weight:400}
+
+/* ===== TOOL SECTION ===== */
+.mric-calc .mric-tool-section{background:var(--navy2);border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border);position:relative;}
+.mric-calc .mric-tool-section::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse 800px 600px at 30% 0%, rgba(0,245,192,0.04) 0%, transparent 70%);pointer-events:none}
+.mric-calc .mric-tool-section>*{position:relative;z-index:1}
+
+.mric-calc .mric-tool-grid{display:block}
+
+/* Form column */
+.mric-calc .mric-form-col{
+  padding:24px;border-radius:16px;
+  background:rgba(11,17,32,0.7);
+  border:1px solid rgba(0,245,192,0.12);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  padding-bottom:28px;margin-bottom:28px;
+  box-shadow:0 4px 32px rgba(0,0,0,0.25), 0 0 60px rgba(0,245,192,0.04);
+}
+.mric-calc .mric-form-col .lbl{margin-bottom:16px}
+.mric-calc .mric-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.mric-calc .mric-field label{display:block;font-size:11px;font-weight:700;color:var(--dsub);margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase}
+.mric-calc .mric-input-wrap{position:relative}
+.mric-calc .mric-input-wrap input,.mric-calc .mric-input-wrap select{
+  width:100%;padding:14px 44px 14px 16px;
+  border:1px solid rgba(255,255,255,0.10);border-radius:10px;
+  background:rgba(11,17,32,0.8);color:#EFF4FF;
+  transition:all .25s cubic-bezier(.4,0,.2,1);
+  box-sizing:border-box;-moz-appearance:textfield;font-size:16px;font-weight:600;
+}
+.mric-calc .mric-input-wrap input::-webkit-outer-spin-button,
+.mric-calc .mric-input-wrap input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.mric-calc .mric-input-wrap input:focus,.mric-calc .mric-input-wrap select:focus{
+  outline:none;border-color:var(--teal);
+  box-shadow:0 0 0 3px rgba(0,245,192,.1), 0 0 24px rgba(0,245,192,.06);
+  background:rgba(11,17,32,0.95);
+}
+.mric-calc .mric-input-wrap select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:40px}
+.mric-calc .mric-input-suffix{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:rgba(197,213,232,0.5);pointer-events:none;font-weight:600;font-size:13px}
+
+/* Separator */
+.mric-calc .mric-form-sep-label{
+  grid-column:1/-1;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--orange);margin-top:4px;
+}
+
+/* Button */
+.mric-calc .mric-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-size:15px;font-weight:700;padding:16px 24px;border-radius:10px;
+  text-decoration:none;transition:all .3s cubic-bezier(.4,0,.2,1);
+  letter-spacing:.02em;border:none;cursor:pointer;width:100%;color:#0B1120;
+  background:var(--teal);
+  box-shadow:0 4px 24px rgba(0,245,192,0.25), inset 0 1px 0 rgba(255,255,255,0.2);
+  position:relative;overflow:hidden;
+}
+.mric-calc .mric-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transition:left .5s ease;}
+.mric-calc .mric-btn:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(0,245,192,0.35), inset 0 1px 0 rgba(255,255,255,0.2);}
+.mric-calc .mric-btn:hover::before{left:100%}
+.mric-calc .mric-btn:active{transform:translateY(0)}
+.mric-calc .mric-btn svg{flex-shrink:0}
+
+/* Results column */
+.mric-calc .mric-results-col{min-width:0;max-width:100%}
+.mric-calc .mric-results{display:none;max-width:100%}
+.mric-calc .mric-results.mric-visible{display:block}
+
+/* Stats row */
+.mric-calc .mric-stats-row{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:20px}
+.mric-calc .mric-stat{
+  background:rgba(11,17,32,0.6);
+  border:1px solid var(--glass-border);border-radius:14px;
+  padding:20px 16px;text-align:center;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+  position:relative;overflow:hidden;
+}
+.mric-calc .mric-stat::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse at 50% 0%, rgba(0,245,192,0.03) 0%, transparent 70%);pointer-events:none;opacity:0;
+  transition:opacity .3s}
+.mric-calc .mric-stat:hover::before{opacity:1}
+.mric-calc .mric-stat:hover{border-color:rgba(0,245,192,0.12);transform:translateY(-2px);box-shadow:var(--glow)}
+.mric-calc .mric-stat.mric-primary{border-color:rgba(0,245,192,0.15)}
+.mric-calc .mric-stat.mric-primary::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--teal),var(--blue),var(--teal));
+  background-size:200% auto;animation:mric-shimmer 3s linear infinite;
+}
+.mric-calc .mric-stat-num{font-size:clamp(14px,1.8vw,22px);font-weight:800;color:var(--teal);line-height:1.2;margin-bottom:6px;overflow-wrap:anywhere;word-break:break-word}
+.mric-calc .mric-stat-num.mric-white{color:#EFF4FF;font-size:clamp(13px,1.6vw,20px)}
+.mric-calc .mric-stat-num.mric-orange{color:var(--orange)}
+.mric-calc .mric-stat-num.mric-gold{color:var(--gold)}
+.mric-calc .mric-stat-lbl{font-size:10px;color:rgba(197,213,232,0.6);letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+
+/* Level badge */
+.mric-calc .mric-level-card{
+  margin-bottom:20px;padding:24px;border-radius:16px;text-align:center;
+  background:rgba(11,17,32,0.6);border:1px solid var(--glass-border);
+  position:relative;overflow:hidden;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+}
+.mric-calc .mric-level-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--teal),var(--blue),var(--teal));
+  background-size:200% auto;animation:mric-shimmer 3s linear infinite;
+}
+.mric-calc .mric-level-emoji{font-size:64px;line-height:1;margin-bottom:10px;display:block}
+.mric-calc .mric-level-name{font-size:clamp(22px,2.5vw,32px);font-weight:800;color:var(--teal);letter-spacing:-.01em;margin-bottom:6px;line-height:1.1}
+.mric-calc .mric-level-desc{font-size:13px;color:var(--dsub);line-height:1.5}
+.mric-calc .mric-level-desc strong{color:#EFF4FF;font-weight:700}
+
+/* Distribution bar */
+.mric-calc .mric-dist-section{margin-bottom:20px;padding:20px;border-radius:14px;background:rgba(11,17,32,0.6);border:1px solid var(--glass-border)}
+.mric-calc .mric-dist-title{font-size:12px;font-weight:700;color:#EFF4FF;letter-spacing:.04em;margin-bottom:14px;text-transform:uppercase}
+.mric-calc .mric-dist-track{
+  position:relative;height:36px;border-radius:8px;overflow:visible;
+  background:linear-gradient(90deg,#FF3B4E 0%,#FF9F43 25%,#FFD700 50%,#00F5C0 75%,#A855F7 100%);
+  box-shadow:inset 0 2px 6px rgba(0,0,0,0.2);
+  margin-bottom:30px;
+}
+.mric-calc .mric-dist-marker{
+  position:absolute;top:-6px;bottom:-6px;width:4px;
+  background:#fff;border-radius:2px;
+  box-shadow:0 0 0 2px var(--navy),0 0 16px rgba(255,255,255,0.5);
+  transition:left .8s cubic-bezier(.34,1.56,.64,1);
+  z-index:2;
+}
+.mric-calc .mric-dist-marker::after{
+  content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);
+  width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid #fff;
+}
+.mric-calc .mric-dist-label{
+  position:absolute;bottom:-26px;left:0;transform:translateX(-50%);
+  font-size:11px;font-weight:700;color:#fff;white-space:nowrap;
+  background:rgba(11,17,32,0.9);padding:4px 8px;border-radius:6px;border:1px solid rgba(0,245,192,0.3);
+}
+.mric-calc .mric-dist-scale{display:flex;justify-content:space-between;font-size:10px;color:rgba(197,213,232,0.6);font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-top:4px}
+
+/* Bar (gardé vs perdu / médiane vs vous) */
+.mric-calc .mric-bar-section{margin-bottom:20px}
+.mric-calc .mric-bar-track{display:flex;height:32px;background:rgba(11,17,32,0.6);border-radius:10px;overflow:hidden;border:1px solid var(--glass-border);box-shadow:inset 0 2px 6px rgba(0,0,0,0.2);}
+.mric-calc .mric-bar-fill{height:100%;display:flex;align-items:center;justify-content:center;transition:width .8s cubic-bezier(.34,1.56,.64,1);overflow:hidden;min-width:0}
+.mric-calc .mric-bar-v{background:linear-gradient(90deg,var(--teal),var(--blue));box-shadow:0 0 20px rgba(0,245,192,0.2)}
+.mric-calc .mric-bar-i{background:linear-gradient(90deg,#1A2847,#2A3F5C)}
+.mric-calc .mric-bar-pct{color:#fff;font-weight:800;font-size:11px;white-space:nowrap;padding:0 8px;letter-spacing:.02em;text-shadow:0 1px 2px rgba(0,0,0,0.3)}
+.mric-calc .mric-bar-legend{display:flex;gap:20px;margin-top:10px;flex-wrap:wrap}
+.mric-calc .mric-bar-legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--dsub)}
+.mric-calc .mric-bar-legend-item strong{color:#EFF4FF;font-size:13px;font-weight:700}
+.mric-calc .mric-ldot{width:8px;height:8px;border-radius:3px;flex-shrink:0}
+.mric-calc .mric-ldot-v{background:var(--teal);box-shadow:0 0 6px rgba(0,245,192,0.4)}
+.mric-calc .mric-ldot-i{background:#2A3F5C}
+
+/* Compare block (passer au niveau supérieur) */
+.mric-calc .mric-compare{margin-bottom:20px;padding:20px;border-radius:14px;background:rgba(255,159,67,0.04);border:1px solid rgba(255,159,67,0.15);position:relative;overflow:hidden;}
+.mric-calc .mric-compare::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--orange),var(--teal));}
+.mric-calc .mric-compare-title{font-size:13px;font-weight:700;color:var(--orange);letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.mric-calc .mric-compare-title svg{width:16px;height:16px;flex-shrink:0}
+.mric-calc .mric-compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.mric-calc .mric-compare-stat{text-align:center;padding:12px 8px}
+.mric-calc .mric-compare-num{font-size:clamp(16px,2vw,22px);font-weight:800;color:var(--orange);line-height:1.2;margin-bottom:4px;overflow-wrap:anywhere;word-break:break-word}
+.mric-calc .mric-compare-num.mric-positive{color:var(--teal)}
+.mric-calc .mric-compare-lbl{font-size:10px;color:rgba(197,213,232,0.6);letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+.mric-calc .mric-compare-msg{font-size:13px;line-height:1.6;color:var(--dsub);padding-top:10px;border-top:1px solid rgba(255,255,255,0.06)}
+.mric-calc .mric-compare-msg strong{color:#EFF4FF;font-weight:600}
+
+/* Chart */
+.mric-calc .mric-chart-wrap{margin-bottom:16px}
+.mric-calc .mric-chart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.mric-calc .mric-chart-title{font-weight:700;font-size:14px;color:#EFF4FF;letter-spacing:.01em}
+.mric-calc #mric-chart{width:100%;border-radius:12px;border:1px solid var(--glass-border);background:rgba(11,17,32,0.5);box-shadow:0 4px 24px rgba(0,0,0,0.15);}
+
+/* Summary */
+.mric-calc .qblock{border-left:3px solid var(--teal);padding:18px 22px;border-radius:0 12px 12px 0;margin-bottom:16px;font-size:14px;font-weight:400;line-height:1.7;box-shadow:0 2px 16px rgba(0,0,0,0.1);}
+.mric-calc .dk .qblock{background:rgba(0,245,192,0.04);color:#EFF4FF;border:1px solid rgba(0,245,192,0.08);border-left:3px solid var(--teal)}
+.mric-calc .lt .qblock{background:rgba(0,245,192,.07);color:var(--lt);border-color:#243842}
+.mric-calc .qblock strong{font-weight:700}
+
+/* Toggle */
+.mric-calc .mric-toggle{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--glass-border);border-radius:8px;color:#EFF4FF;cursor:pointer;transition:all .25s;font-weight:600;font-size:12px;}
+.mric-calc .mric-toggle:hover{border-color:rgba(0,245,192,0.2);color:var(--teal);background:rgba(0,245,192,.04)}
+.mric-calc .mric-chevron{transition:transform .3s}
+.mric-calc .mric-toggle.mric-open .mric-chevron{transform:rotate(180deg)}
+
+/* Table */
+.mric-calc .mric-table-full{margin-top:0;padding:0 24px 32px}
+.mric-calc .mric-table-container{display:none}
+.mric-calc .mric-table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.mric-calc .mric-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
+.mric-calc .mric-table thead{background:rgba(11,17,32,0.8)}
+.mric-calc .mric-table th{padding:14px 16px;text-align:right;color:rgba(197,213,232,0.6);font-weight:700;white-space:nowrap;font-size:10px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid var(--glass-border)}
+.mric-calc .mric-table th:first-child{text-align:left}
+.mric-calc .mric-table td{padding:12px 16px;text-align:right;white-space:nowrap;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--dsub);font-weight:500}
+.mric-calc .mric-table td:first-child{text-align:left;font-weight:700;color:#EFF4FF}
+.mric-calc .mric-table tbody tr{transition:all .2s}
+.mric-calc .mric-table tbody tr:hover{background:rgba(0,245,192,.03)}
+.mric-calc .mric-table .mric-row-you{background:rgba(0,245,192,0.08)}
+.mric-calc .mric-table .mric-row-you td{color:var(--teal);font-weight:700}
+
+/* ===== Educational sections ===== */
+.mric-calc .srow{display:grid;grid-template-columns:1fr;gap:14px;margin:32px 0}
+.mric-calc .dk .scard{background:rgba(255,255,255,0.02);border:1px solid var(--glass-border);border-radius:14px;padding:28px 20px;text-align:center;transition:all .3s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;}
+.mric-calc .dk .scard::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 0%, rgba(0,245,192,0.04) 0%, transparent 70%);opacity:0;transition:opacity .3s;pointer-events:none}
+.mric-calc .dk .scard:hover{border-color:rgba(0,245,192,0.12);transform:translateY(-3px);box-shadow:var(--glow)}
+.mric-calc .dk .scard:hover::before{opacity:1}
+.mric-calc .lt .scard{background:#fff;border:1px solid var(--lborder);border-radius:14px;padding:28px 20px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.04);transition:all .3s cubic-bezier(.4,0,.2,1);}
+.mric-calc .lt .scard:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.08)}
+.mric-calc .scard .num{font-size:clamp(26px,3vw,40px);font-weight:800;color:var(--teal);line-height:1;margin-bottom:10px}
+.mric-calc .lt .scard .num{color:#243842}
+.mric-calc .scard .lbl2{font-size:13px;line-height:1.5}
+.mric-calc .dk .scard .lbl2{color:var(--dsub)}
+.mric-calc .lt .scard .lbl2{color:var(--lsub)}
+
+/* Cards */
+.mric-calc .cgrid{display:grid;gap:12px;margin:28px 0}
+.mric-calc .card{border-radius:14px;padding:24px 24px 24px 20px;display:flex;gap:16px;align-items:flex-start;transition:all .3s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;}
+.mric-calc .dk .card{background:rgba(255,255,255,0.02);border:1px solid var(--glass-border)}
+.mric-calc .dk .card:hover{border-color:rgba(0,245,192,0.12);transform:translateY(-2px);box-shadow:var(--glow)}
+.mric-calc .lt .card{background:#fff;border:1px solid var(--lborder);box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.mric-calc .lt .card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.08)}
+.mric-calc .cnum{font-size:36px;font-weight:800;line-height:1;flex-shrink:0;min-width:48px;margin-top:-2px}
+.mric-calc .dk .cnum{color:#00F5C0;opacity:.3}
+.mric-calc .lt .cnum{color:#243842}
+.mric-calc .card h3{font-size:17px;font-weight:700;margin-bottom:5px}
+.mric-calc .dk .card h3{color:#EFF4FF}
+.mric-calc .lt .card h3{color:var(--lt)}
+.mric-calc .card p{font-size:14px;margin:0;line-height:1.65}
+.mric-calc .dk .card p{color:var(--dsub)}
+.mric-calc .lt .card p{color:var(--lsub)}
+
+/* Formula card */
+.mric-calc .mric-formula{position:relative;background:rgba(11,17,32,0.7);border:1px solid var(--glass-border);border-radius:14px;padding:28px 28px;margin:24px 0;overflow:hidden;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+.mric-calc .lt .mric-formula{background:var(--lt);border-color:var(--lt)}
+.mric-calc .mric-formula::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--blue),var(--teal));background-size:200% auto;animation:mric-shimmer 4s linear infinite;}
+.mric-calc .mric-formula p{color:#EFF4FF;margin:0 0 8px;line-height:1.6;font-weight:500}
+.mric-calc .lt .mric-formula p{color:#fff}
+.mric-calc .mric-formula ul{padding-left:20px;margin:10px 0 0;list-style:none}
+.mric-calc .mric-formula li{color:#B4C8DE;margin-bottom:4px;font-size:14px;padding-left:16px;position:relative;line-height:1.5}
+.mric-calc .mric-formula li::before{content:'→';position:absolute;left:0;top:0;color:var(--teal);opacity:.5;font-size:12px}
+.mric-calc .mric-formula li strong{color:#EFF4FF}
+
+/* FAQ */
+.mric-calc .flist{margin:24px 0;display:grid;gap:8px}
+.mric-calc .flist details{border-radius:12px;overflow:hidden;transition:all .3s}
+.mric-calc .dk .flist details{background:rgba(255,255,255,0.02);border:1px solid var(--glass-border)}
+.mric-calc .dk .flist details:hover{border-color:rgba(0,245,192,0.1)}
+.mric-calc .dk .flist details[open]{border-color:rgba(0,245,192,0.12);box-shadow:0 0 30px rgba(0,245,192,0.04)}
+.mric-calc .lt .flist details{background:#fff;border:1px solid var(--lborder)}
+.mric-calc .lt .flist details:hover{box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.mric-calc .flist summary{padding:20px 24px;cursor:pointer;font-weight:700;font-size:16px;display:flex;justify-content:space-between;align-items:center;list-style:none;transition:color .2s}
+.mric-calc .dk .flist summary{color:#EFF4FF}
+.mric-calc .lt .flist summary{color:var(--lt)}
+.mric-calc .flist summary::-webkit-details-marker{display:none}
+.mric-calc .flist summary::after{content:'+';font-size:20px;font-weight:400;color:var(--teal);transition:all .3s cubic-bezier(.4,0,.2,1);flex-shrink:0;margin-left:16px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(0,245,192,0.06);}
+.mric-calc .flist details[open] summary::after{transform:rotate(45deg);background:rgba(0,245,192,0.12)}
+.mric-calc .flist .fans{padding:0 24px 22px;font-size:15px;line-height:1.75}
+.mric-calc .dk .flist .fans{color:var(--dsub)}
+.mric-calc .lt .flist .fans{color:var(--lsub)}
+
+/* ===== CTA Lead Magnet ===== */
+.mric-calc .mric-lm{position:relative;overflow:hidden;padding:32px 0 28px;margin-bottom:24px;border-top:1px solid rgba(255,255,255,0.06);}
+.mric-calc .mric-lm-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.mric-calc .mric-lm-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
+.mric-calc .mric-lm-icon img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+.mric-calc .mric-lm-title{font-size:15px;font-weight:700;color:#EFF4FF;line-height:1.3}
+.mric-calc .mric-lm-title span{color:var(--teal)}
+.mric-calc .mric-lm-desc{font-size:13px;line-height:1.6;color:var(--dsub);margin-bottom:16px}
+.mric-calc .mric-lm-desc strong{color:#EFF4FF;font-weight:600}
+.mric-calc .mric-lm-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.mric-calc .mric-lm-row iframe{max-width:100%}
+.mric-calc .mric-lm-fine{font-size:10px;color:#fff;margin-top:12px;letter-spacing:.02em}
+
+/* Guides */
+.mric-calc .mric-guides{padding:28px 0 0;border-top:1px solid rgba(255,255,255,0.06);overflow:hidden}
+.mric-calc .mric-guides-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.mric-calc .mric-guides-logo{height:18px;width:auto}
+.mric-calc .mric-guides-title{font-size:13px;font-weight:700;color:#EFF4FF;letter-spacing:.01em}
+.mric-calc .mric-guides-grid{display:grid;grid-template-columns:1fr;gap:6px}
+.mric-calc .mric-guide-link{display:flex;align-items:center;gap:12px;padding:10px 0;text-decoration:none;transition:all .2s ease}
+.mric-calc .mric-guide-link:hover .mric-guide-txt strong{color:var(--teal)}
+.mric-calc .mric-guide-icon{flex-shrink:0;width:20px;height:20px;color:var(--teal)}
+.mric-calc .mric-guide-txt{display:flex;flex-direction:column;gap:1px;flex:1;min-width:0}
+.mric-calc .mric-guide-txt strong{font-size:13px;font-weight:600;color:#EFF4FF;line-height:1.3}
+.mric-calc .mric-guide-txt span{font-size:11px;color:#EFF4FF}
+.mric-calc .mric-guide-link svg.mric-guide-chevron{flex-shrink:0;color:#fff;transition:all .2s}
+.mric-calc .mric-guide-link:hover svg.mric-guide-chevron{color:var(--teal);transform:translateX(2px)}
+
+/* Other calculators */
+.mric-calc .mric-othercalc{margin-top:28px;padding:20px;border-radius:14px;background:rgba(0,245,192,0.04);border:1px solid rgba(0,245,192,0.10);position:relative;overflow:hidden;}
+.mric-calc .mric-othercalc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--blue));}
+.mric-calc .mric-othercalc-title{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.mric-calc .mric-othercalc-grid{display:grid;grid-template-columns:1fr;gap:0}
+.mric-calc .mric-othercalc-item{display:flex;align-items:center;gap:12px;padding:10px 0;text-decoration:none;transition:all .2s ease;border-bottom:1px solid rgba(0,245,192,0.06);}
+.mric-calc .mric-othercalc-item:last-child{border-bottom:none;padding-bottom:0}
+.mric-calc .mric-othercalc-item:first-child{padding-top:0}
+.mric-calc .mric-othercalc-item:hover .mric-othercalc-name{color:var(--teal)}
+.mric-calc .mric-othercalc-name{font-size:13px;font-weight:600;color:#EFF4FF;flex:1;line-height:1.3;transition:color .2s}
+.mric-calc .mric-othercalc-desc{font-size:11px;color:rgba(210,225,240,0.85);display:none}
+.mric-calc .mric-othercalc-item svg{flex-shrink:0;width:14px;height:14px;color:rgba(210,225,240,0.7);transition:all .2s}
+.mric-calc .mric-othercalc-item:hover svg{color:var(--teal);transform:translateX(2px)}
+@media(min-width:640px){
+  .mric-calc .mric-othercalc-grid{grid-template-columns:1fr 1fr 1fr;gap:0}
+  .mric-calc .mric-othercalc-item{border-bottom:none;padding:0 12px;border-right:1px solid rgba(0,245,192,0.08)}
+  .mric-calc .mric-othercalc-item:last-child{border-right:none;padding-right:0}
+  .mric-calc .mric-othercalc-item:first-child{padding-left:0}
+  .mric-calc .mric-othercalc-desc{display:block}
+}
+
+/* Share buttons */
+.mric-calc .mric-share{padding:24px 0;border-top:1px solid rgba(255,255,255,0.06);margin-bottom:8px}
+.mric-calc .mric-share-lbl{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.mric-calc .mric-share-row{display:flex;gap:10px;flex-wrap:wrap}
+.mric-calc .mric-share-btn{width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1);position:relative;color:#fff;padding:0;}
+.mric-calc .mric-share-btn:hover{border-color:rgba(0,245,192,0.3);color:var(--teal);background:rgba(0,245,192,0.08);box-shadow:0 0 20px rgba(0,245,192,0.1);transform:translateY(-2px);}
+.mric-calc .mric-share-btn svg{width:18px;height:18px;fill:currentColor}
+.mric-calc .mric-share-btn--copy{width:auto;padding:0 16px;gap:8px;font-size:12px;font-weight:600}
+.mric-calc .mric-share-btn--copy svg{width:16px;height:16px}
+.mric-calc .mric-share-toast{position:absolute;bottom:-28px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:600;color:var(--teal);white-space:nowrap;opacity:0;transition:opacity .3s;pointer-events:none;}
+.mric-calc .mric-share-toast.mric-show{opacity:1}
+.mric-calc .mric-share-native{display:none;width:auto;padding:0 20px;gap:8px;font-size:13px;font-weight:700;color:#fff;background:rgba(0,245,192,0.12);border:1px solid rgba(0,245,192,0.25);}
+.mric-calc .mric-share-native:hover{background:rgba(0,245,192,0.2)}
+@media(max-width:600px){
+  .mric-calc .mric-share-native.mric-has-api{display:flex}
+  .mric-calc .mric-share-row.mric-has-native{display:none}
+}
+
+/* Animations */
+@keyframes mric-fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.mric-calc .mric-anim{opacity:1}
+.mric-calc .mric-anim-d1{animation-delay:.1s}
+.mric-calc .mric-anim-d2{animation-delay:.2s}
+.mric-calc .mric-anim-d3{animation-delay:.3s}
+.mric-calc .mric-anim-d4{animation-delay:.4s}
+
+/* Scroll reveal */
+.mric-calc section .inn>*,.mric-calc section .inn-wide>*{opacity:1;transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);}
+.mric-calc section.mric-visible .inn>*,.mric-calc section.mric-visible .inn-wide>*{opacity:1;transform:translateY(0);}
+.mric-calc section.mric-visible .inn>*:nth-child(2){transition-delay:.08s}
+.mric-calc section.mric-visible .inn>*:nth-child(3){transition-delay:.16s}
+.mric-calc section.mric-visible .inn>*:nth-child(4){transition-delay:.24s}
+.mric-calc section.mric-visible .inn>*:nth-child(5){transition-delay:.32s}
+
+/* Responsive */
+@media(min-width:961px){
+  .mric-calc .mric-tool-grid{display:grid;grid-template-columns:400px 1fr;gap:36px;align-items:start}
+  .mric-calc .mric-form-col{position:sticky;top:24px;margin-bottom:0}
+  .mric-calc .mric-stats-row{grid-template-columns:1fr 1fr}
+  .mric-calc .mric-stats-row.mric-4{grid-template-columns:1fr 1fr 1fr 1fr}
+  .mric-calc .mric-compare-grid{grid-template-columns:1fr 1fr 1fr 1fr}
+  .mric-calc .srow{grid-template-columns:repeat(3,1fr)}
+  .mric-calc .mric-guides-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:360px){
+  .mric-calc .mric-form-grid{grid-template-columns:1fr}
+  .mric-calc .mric-hero h1{font-size:24px}
+  .mric-calc .stitle{font-size:22px}
+}
+</style>
+
+<div class="mric-calc" data-share-url="https://moneyradar.org/simulateur-riche-pour-age/">
+
+  <!-- ===== HERO ===== -->
+  <section class="mric-hero">
+    <div class="inn">
+      <img src="https://moneyradar.org/lp4/wp-content/themes/astra-child/assets/images/moneyradar-logo.webp" alt="MoneyRadar" class="mric-hero-logo">
+      <h1>Êtes-vous <em>riche pour votre âge</em> ?</h1>
+      <p class="mric-hero-sub">Découvrez votre rang exact parmi les Français de votre génération. Saisissez votre âge et votre patrimoine, on vous dit dans quel <strong>top %</strong> vous vous situez, combien d'années d'avance ou de retard vous avez sur la moyenne, et combien il vous manque pour entrer dans le top 1 %.</p>
+    </div>
+  </section>
+
+  <!-- ===== COMMENT ÇA MARCHE ===== -->
+  <section class="mric-how">
+    <div class="inn" style="padding-top:40px;padding-bottom:40px">
+      <span class="lbl">Comment ça marche</span>
+      <p style="font-size:15px;color:var(--dsub);margin-bottom:0;line-height:1.65">Ce calculateur s'appuie sur les <strong style="color:#EFF4FF">données INSEE de l'Enquête Patrimoine</strong>, qui mesure la richesse réelle des ménages français. On compare votre <strong style="color:#EFF4FF">patrimoine net</strong> (actifs financiers + immobilier − dettes) à la distribution des Français de votre tranche d'âge, et on en déduit votre <strong style="color:var(--teal)">rang exact</strong>, votre niveau, et combien il vous reste pour passer au niveau supérieur.</p>
+    </div>
+  </section>
+
+  <!-- ===== OUTIL : 2 COLONNES ===== -->
+  <section class="dk mric-tool-section">
+    <div class="inn-wide">
+      <div class="mric-tool-grid">
+
+        <!-- COL GAUCHE : Formulaire -->
+        <div class="mric-form-col">
+          <span class="lbl">Vos paramètres</span>
+          <div class="mric-form-grid">
+
+            <div class="mric-form-sep-label" style="margin-top:0">👤 Vous</div>
+            <div class="mric-field">
+              <label for="mric-age">Votre âge</label>
+              <div class="mric-input-wrap">
+                <input type="number" id="mric-age" value="35" min="18" max="90" step="1" inputmode="numeric">
+                <span class="mric-input-suffix">ans</span>
+              </div>
+              <div class="mric-field-hint">Entre 18 et 90 ans</div>
+            </div>
+            <div class="mric-field">
+              <label for="mric-situation">Situation</label>
+              <div class="mric-input-wrap">
+                <select id="mric-situation">
+                  <option value="seul">Seul / célibataire</option>
+                  <option value="couple">En couple</option>
+                </select>
+              </div>
+              <div class="mric-field-hint">Saisissez le patrimoine du ménage entier si en couple</div>
+            </div>
+
+            <div class="mric-form-sep-label">💰 Vos actifs</div>
+            <div class="mric-field">
+              <label for="mric-liquide">Liquidités</label>
+              <div class="mric-input-wrap">
+                <input type="number" id="mric-liquide" value="10000" min="0" step="1000" inputmode="numeric">
+                <span class="mric-input-suffix">€</span>
+              </div>
+              <div class="mric-field-hint">Compte courant, livret A, LDDS, livrets bancaires</div>
+            </div>
+            <div class="mric-field">
+              <label for="mric-invest">Placements financiers</label>
+              <div class="mric-input-wrap">
+                <input type="number" id="mric-invest" value="20000" min="0" step="1000" inputmode="numeric">
+                <span class="mric-input-suffix">€</span>
+              </div>
+              <div class="mric-field-hint">PEA, assurance vie, CTO, PER, crypto, actions</div>
+            </div>
+            <div class="mric-field">
+              <label for="mric-immo">Immobilier</label>
+              <div class="mric-input-wrap">
+                <input type="number" id="mric-immo" value="200000" min="0" step="10000" inputmode="numeric">
+                <span class="mric-input-suffix">€</span>
+              </div>
+              <div class="mric-field-hint">Valeur de marché de votre résidence principale, secondaire, locatif, SCPI</div>
+            </div>
+            <div class="mric-field">
+              <label for="mric-autres">Autres</label>
+              <div class="mric-input-wrap">
+                <input type="number" id="mric-autres" value="0" min="0" step="1000" inputmode="numeric">
+                <span class="mric-input-suffix">€</span>
+              </div>
+              <div class="mric-field-hint">Entreprise, voiture (si valeur), or, art, collections</div>
+            </div>
+
+            <div class="mric-form-sep-label">📉 Vos dettes</div>
+            <div class="mric-field">
+              <label for="mric-dette-immo">Crédit immobilier restant</label>
+              <div class="mric-input-wrap">
+                <input type="number" id="mric-dette-immo" value="120000" min="0" step="5000" inputmode="numeric">
+                <span class="mric-input-suffix">€</span>
+              </div>
+              <div class="mric-field-hint">Capital restant dû sur vos crédits immobiliers</div>
+            </div>
+            <div class="mric-field">
+              <label for="mric-dette-conso">Crédit conso / autres</label>
+              <div class="mric-input-wrap">
+                <input type="number" id="mric-dette-conso" value="0" min="0" step="500" inputmode="numeric">
+                <span class="mric-input-suffix">€</span>
+              </div>
+              <div class="mric-field-hint">Voiture, travaux, étudiant, prêts personnels</div>
+            </div>
+          </div>
+          <button class="mric-btn" id="mric-btn-calculer" type="button">
+            Découvrir mon rang
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+
+        <!-- COL DROITE : Résultats -->
+        <div class="mric-results-col">
+          <div class="mric-results" id="mric-results">
+
+            <!-- Niveau gamifié -->
+            <div class="mric-level-card mric-anim">
+              <span class="mric-level-emoji" id="mric-level-emoji">🥈</span>
+              <div class="mric-level-name" id="mric-level-name">Argent</div>
+              <div class="mric-level-desc" id="mric-level-desc">Niveau de votre patrimoine</div>
+            </div>
+
+            <!-- Stats principales -->
+            <div class="mric-stats-row mric-4">
+              <div class="mric-stat mric-primary mric-anim">
+                <div class="mric-stat-num" id="mric-rang">—</div>
+                <div class="mric-stat-lbl">Votre rang</div>
+              </div>
+              <div class="mric-stat mric-anim mric-anim-d1">
+                <div class="mric-stat-num mric-white" id="mric-patrimoine-net">—</div>
+                <div class="mric-stat-lbl">Votre patrimoine net</div>
+              </div>
+              <div class="mric-stat mric-anim mric-anim-d1">
+                <div class="mric-stat-num mric-white" id="mric-mediane">—</div>
+                <div class="mric-stat-lbl">Médiane de votre âge</div>
+              </div>
+              <div class="mric-stat mric-anim mric-anim-d2">
+                <div class="mric-stat-num" id="mric-ecart-mediane">—</div>
+                <div class="mric-stat-lbl">Écart vs médiane</div>
+              </div>
+            </div>
+
+            <!-- Distribution bar avec curseur -->
+            <div class="mric-dist-section mric-anim mric-anim-d2">
+              <div class="mric-dist-title">Votre position dans la distribution</div>
+              <div class="mric-dist-track">
+                <div class="mric-dist-marker" id="mric-dist-marker" style="left:50%">
+                  <div class="mric-dist-label" id="mric-dist-label">Vous</div>
+                </div>
+              </div>
+              <div class="mric-dist-scale">
+                <span>Bottom 0%</span>
+                <span>Top 50%</span>
+                <span>Top 25%</span>
+                <span>Top 10%</span>
+                <span>Top 1%</span>
+              </div>
+            </div>
+
+            <!-- Bar : composition de votre patrimoine -->
+            <div class="mric-bar-section mric-anim mric-anim-d2">
+              <div class="mric-bar-track">
+                <div class="mric-bar-fill mric-bar-v" id="mric-bar-v" style="width:0"><span class="mric-bar-pct" id="mric-pct-v"></span></div>
+                <div class="mric-bar-fill mric-bar-i" id="mric-bar-i" style="width:0"><span class="mric-bar-pct" id="mric-pct-i"></span></div>
+              </div>
+              <div class="mric-bar-legend">
+                <div class="mric-bar-legend-item"><span class="mric-ldot mric-ldot-v"></span><span>Patrimoine financier</span> <strong id="mric-legend-v">—</strong></div>
+                <div class="mric-bar-legend-item"><span class="mric-ldot mric-ldot-i"></span><span>Patrimoine immobilier net</span> <strong id="mric-legend-i">—</strong></div>
+              </div>
+            </div>
+
+            <!-- Bloc : passer au niveau supérieur -->
+            <div class="mric-compare mric-anim mric-anim-d3" id="mric-compare">
+              <div class="mric-compare-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="fill:none"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
+                Combien pour passer au niveau supérieur ?
+              </div>
+              <div class="mric-compare-grid" id="mric-compare-grid">
+                <div class="mric-compare-stat">
+                  <div class="mric-compare-num" id="mric-cmp-top10">—</div>
+                  <div class="mric-compare-lbl">Pour le top 10 %</div>
+                </div>
+                <div class="mric-compare-stat">
+                  <div class="mric-compare-num" id="mric-cmp-top1">—</div>
+                  <div class="mric-compare-lbl">Pour le top 1 %</div>
+                </div>
+                <div class="mric-compare-stat">
+                  <div class="mric-compare-num mric-positive" id="mric-cmp-avance">—</div>
+                  <div class="mric-compare-lbl">Avance / retard</div>
+                </div>
+                <div class="mric-compare-stat">
+                  <div class="mric-compare-num" id="mric-cmp-equiv">—</div>
+                  <div class="mric-compare-lbl">Patrimoine équivalent à</div>
+                </div>
+              </div>
+              <div class="mric-compare-msg" id="mric-compare-msg"></div>
+            </div>
+
+            <!-- Chart : courbes par âge -->
+            <div class="mric-chart-wrap mric-anim mric-anim-d3">
+              <div class="mric-chart-header">
+                <span class="mric-chart-title">Patrimoine par tranche d'âge en France</span>
+                <button class="mric-toggle" id="mric-toggle-table" type="button">
+                  <span>Tableau</span>
+                  <svg class="mric-chevron" width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+              <canvas id="mric-chart" height="240"></canvas>
+            </div>
+
+            <!-- Summary -->
+            <div class="qblock mric-anim mric-anim-d4" id="mric-summary"></div>
+
+            <!-- Share buttons -->
+            <div class="mric-share mric-anim mric-anim-d4" id="mric-share">
+              <div class="mric-share-lbl">Partager votre rang</div>
+              <button class="mric-share-btn mric-share-native" id="mric-share-native" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="fill:none"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                Partager
+              </button>
+              <div class="mric-share-row" id="mric-share-row">
+                <button class="mric-share-btn mric-share-btn--copy" data-platform="copy" type="button" title="Copier le lien">
+                  <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                  Copier
+                  <span class="mric-share-toast" id="mric-toast">Copié !</span>
+                </button>
+                <button class="mric-share-btn" data-platform="twitter" type="button" title="Partager sur X / Twitter">
+                  <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </button>
+                <button class="mric-share-btn" data-platform="facebook" type="button" title="Partager sur Facebook">
+                  <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </button>
+                <button class="mric-share-btn" data-platform="whatsapp" type="button" title="Partager sur WhatsApp">
+                  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </button>
+                <button class="mric-share-btn" data-platform="linkedin" type="button" title="Partager sur LinkedIn">
+                  <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </button>
+                <button class="mric-share-btn" data-platform="telegram" type="button" title="Partager sur Telegram">
+                  <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                </button>
+                <button class="mric-share-btn" data-platform="email" type="button" title="Envoyer par email">
+                  <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Lead Magnet -->
+            <div class="mric-lm mric-anim mric-anim-d4">
+              <div class="mric-lm-head">
+                <div class="mric-lm-icon"><img src="https://moneyradar.org/wp-content/uploads/2026/03/Capture-decran-2026-03-06-a-11.01.24.png" alt="Masterclass investissement"></div>
+                <div class="mric-lm-title"><span>Cadeau :</span> votre masterclass investissement offerte</div>
+              </div>
+              <p class="mric-lm-desc">On vous offre <strong>45 min de formation avec un stratégiste macro</strong> pour comprendre les cycles économiques et prendre de meilleures décisions d'investissement. <strong style="color:var(--teal)">+ Le rapport Mégatendances 2026 en bonus.</strong></p>
+              <div class="mric-lm-row">
+                <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+                <iframe src="https://subscribe-forms.beehiiv.com/6b4ebcf6-43b1-46fd-86b1-aca466483c43" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width:340px;height:47px;margin:0;border-radius:0;background-color:transparent;box-shadow:none;max-width:100%;"></iframe>
+              </div>
+              <p class="mric-lm-fine">100% gratuit · Vos données restent privées · Désabonnement en 1 clic</p>
+            </div>
+
+            <!-- Liens internes — guides -->
+            <div class="mric-guides mric-anim mric-anim-d4">
+              <div class="mric-guides-head"><img src="https://moneyradar.org/lp4/wp-content/themes/astra-child/assets/images/moneyradar-logo.webp" alt="MoneyRadar" class="mric-guides-logo"><div class="mric-guides-title">Nos guides pour bien investir</div></div>
+              <div class="mric-guides-grid">
+                <a href="https://moneyradar.org/bourse/pea/meilleur-pea/" class="mric-guide-link" target="_blank" rel="noopener">
+                  <svg class="mric-guide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                  <span class="mric-guide-txt"><strong>Meilleur PEA</strong><span>Comparatif des meilleurs PEA</span></span>
+                  <svg class="mric-guide-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+                <a href="https://moneyradar.org/assurance-vie/meilleure-assurance-vie/" class="mric-guide-link" target="_blank" rel="noopener">
+                  <svg class="mric-guide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <span class="mric-guide-txt"><strong>Meilleure assurance vie</strong><span>Comparatif des meilleurs contrats</span></span>
+                  <svg class="mric-guide-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+                <a href="https://moneyradar.org/dans-quoi-investir/" class="mric-guide-link" target="_blank" rel="noopener">
+                  <svg class="mric-guide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                  <span class="mric-guide-txt"><strong>Dans quoi investir</strong><span>Guide complet pour placer son argent</span></span>
+                  <svg class="mric-guide-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+                <a href="https://moneyradar.org/bourse/meilleur-broker/" class="mric-guide-link" target="_blank" rel="noopener">
+                  <svg class="mric-guide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                  <span class="mric-guide-txt"><strong>Meilleur broker</strong><span>Comparatif des meilleurs courtiers</span></span>
+                  <svg class="mric-guide-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+                <a href="https://moneyradar.org/bourse/compte-titres/" class="mric-guide-link" target="_blank" rel="noopener">
+                  <svg class="mric-guide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  <span class="mric-guide-txt"><strong>Meilleur compte-titres</strong><span>Comparatif des meilleurs CTO</span></span>
+                  <svg class="mric-guide-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+                <a href="https://moneyradar.org/guides/dca/" class="mric-guide-link" target="_blank" rel="noopener">
+                  <svg class="mric-guide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                  <span class="mric-guide-txt"><strong>Le DCA expliqué</strong><span>La stratégie des versements réguliers</span></span>
+                  <svg class="mric-guide-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Nos autres calculateurs -->
+            <div class="mric-othercalc mric-anim mric-anim-d4">
+              <div class="mric-othercalc-title">Nos autres calculateurs</div>
+              <div class="mric-othercalc-grid">
+                <a href="https://moneyradar.org/guides/interets-composes/" class="mric-othercalc-item">
+                  <div>
+                    <div class="mric-othercalc-name">Intérêts Composés</div>
+                    <div class="mric-othercalc-desc">Simulez la croissance de votre épargne</div>
+                  </div>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+                <a href="https://moneyradar.org/simulateur-liberte-financiere/" class="mric-othercalc-item">
+                  <div>
+                    <div class="mric-othercalc-name">Liberté Financière</div>
+                    <div class="mric-othercalc-desc">Calculez le capital pour vivre de vos placements</div>
+                  </div>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+                <a href="https://moneyradar.org/simulateur-objectif-financier/" class="mric-othercalc-item">
+                  <div>
+                    <div class="mric-othercalc-name">Objectif Financier</div>
+                    <div class="mric-othercalc-desc">Calculez votre épargne mensuelle idéale</div>
+                  </div>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="mric-table-full">
+      <div class="mric-table-container" id="mric-table-container" style="max-width:1100px;margin:0 auto">
+        <div class="mric-table-scroll">
+          <table class="mric-table">
+            <thead><tr><th>Tranche d'âge</th><th>Médian</th><th>Moyenne</th><th>Top 10 %</th><th>Top 1 %</th></tr></thead>
+            <tbody id="mric-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ÉDUCATIF : DÉFINITION ===== -->
+  <section class="lt">
+    <div class="inn">
+      <h2 class="stitle">Patrimoine net : la vraie mesure de la richesse</h2>
+      <p class="btxt">La richesse ne se mesure pas au salaire mais au <strong>patrimoine net</strong> : la somme de tout ce que vous possédez (immobilier, placements, liquidités) <strong>moins toutes vos dettes</strong>. C'est l'indicateur le plus fiable, retenu par l'INSEE et la Banque de France pour leurs études.</p>
+      <p class="btxt">À salaire égal, deux Français peuvent avoir des patrimoines très différents selon leur taux d'épargne, leurs investissements et leur héritage. Le patrimoine net reflète vos choix financiers cumulés sur toute votre vie, pas votre revenu de l'année.</p>
+      <div class="qblock">
+        <strong>Exemple concret :</strong> deux personnes de 40 ans gagnent 3 000 €/mois. La première a 250 000 € de patrimoine net, la seconde 30 000 €. À revenu identique, la première est <strong>10 ans en avance</strong> sur la seconde grâce à ses choix d'épargne et d'investissement.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TOP 10 / 1 ===== -->
+  <section class="dk">
+    <div class="inn">
+      <h2 class="stitle">Top 10 %, top 1 % : les seuils en France</h2>
+      <p class="btxt">Selon l'INSEE et la Banque de France, voici les seuils de patrimoine net qui définissent les classes de richesse en France (hors résidence principale incluse) :</p>
+      <div class="mric-formula">
+        <p><strong>Seuils nationaux (tous âges confondus)</strong></p>
+        <ul>
+          <li><strong>Top 50 %</strong> : 177 000 € de patrimoine net</li>
+          <li><strong>Top 10 %</strong> : 716 000 €</li>
+          <li><strong>Top 5 %</strong> : 1 070 000 €</li>
+          <li><strong>Top 1 %</strong> : 2 200 000 €</li>
+          <li><strong>Top 0,1 %</strong> : 5 800 000 €</li>
+        </ul>
+      </div>
+      <p class="btxt">Ces seuils varient fortement selon l'âge : à 30 ans, atteindre <strong>250 000 €</strong> vous place déjà dans le top 10 % de votre génération, alors qu'à 60 ans il faut <strong>plus d'1 million</strong>.</p>
+    </div>
+  </section>
+
+  <!-- ===== 3 LEVIERS ===== -->
+  <section class="lt">
+    <div class="inn">
+      <h2 class="stitle">Les 3 leviers pour grimper dans la distribution</h2>
+      <p class="btxt">Quel que soit votre âge ou votre point de départ, trois leviers permettent de progresser significativement dans la distribution du patrimoine.</p>
+      <div class="srow">
+        <div class="scard"><div class="num">1</div><div class="lbl2"><strong>Augmenter votre taux d'épargne</strong><br>Le seul facteur réellement sous votre contrôle. Passer de 10 % à 25 % triple la vitesse d'accumulation.</div></div>
+        <div class="scard"><div class="num">2</div><div class="lbl2"><strong>Investir au lieu d'épargner</strong><br>Un livret A ne suit pas l'inflation. Un ETF actions monde rapporte historiquement 7 % par an.</div></div>
+        <div class="scard"><div class="num">3</div><div class="lbl2"><strong>Acheter votre résidence principale</strong><br>L'immo représente 60 % du patrimoine des Français. Devenir propriétaire est le levier #1 de constitution de patrimoine.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== POURQUOI MÉDIANE / MOYENNE ===== -->
+  <section class="dk">
+    <div class="inn">
+      <h2 class="stitle">Pourquoi la médiane est plus juste que la moyenne</h2>
+      <p class="btxt">En France, la <strong>moyenne du patrimoine</strong> est de 290 000 € par ménage. Mais la <strong>médiane</strong>, elle, n'est que de <strong>177 000 €</strong>. Cet écart énorme s'explique par la concentration extrême du patrimoine en haut de la distribution.</p>
+      <div class="cgrid">
+        <div class="card"><div class="cnum" style="color:#00F5C0;opacity:1">×1,6</div><div><h3>Moyenne vs médiane</h3><p>La moyenne est gonflée par les ultra-riches. Les 1 % les plus riches détiennent <strong>30 % du patrimoine total</strong> en France.</p></div></div>
+        <div class="card"><div class="cnum" style="color:#00F5C0;opacity:1">50 %</div><div><h3>Sous la médiane</h3><p>Par définition, 50 % des Français ont moins que le patrimoine médian. La moyenne, elle, est dépassée seulement par 30 % de la population.</p></div></div>
+        <div class="card"><div class="cnum" style="color:#00F5C0;opacity:1">+++</div><div><h3>Comparez-vous au médian</h3><p>C'est le seul chiffre qui reflète honnêtement la réalité du Français "type". La moyenne donne une fausse image de richesse collective.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ENVELOPPES POUR GRIMPER ===== -->
+  <section class="lt">
+    <div class="inn">
+      <h2 class="stitle">Les meilleures enveloppes pour faire croître votre patrimoine</h2>
+      <p class="btxt">Pour grimper dans la distribution, il faut investir dans les bonnes enveloppes fiscales. Voici les 3 piliers en France :</p>
+      <div class="cgrid">
+        <div class="card">
+          <div class="cnum">1</div>
+          <div>
+            <h3>PEA <span style="color:var(--teal)">(plafond 150 000 €)</span></h3>
+            <p>Exonération d'impôt sur le revenu après 5 ans. L'enveloppe préférée des investisseurs en actions et ETF actions européens / monde.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="cnum">2</div>
+          <div>
+            <h3>Assurance vie <span style="color:var(--teal)">(pas de plafond)</span></h3>
+            <p>Abattement annuel après 8 ans, transmission optimisée. Permet de diversifier sur tous types de supports : fonds euros, ETF, SCPI, etc.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="cnum">3</div>
+          <div>
+            <h3>Immobilier locatif <span style="color:var(--teal)">(effet de levier)</span></h3>
+            <p>Le seul actif que vous pouvez acheter à crédit. Permet de constituer un patrimoine avec l'argent de la banque + les loyers des locataires.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="dk">
+    <div class="inn">
+      <h2 class="stitle">Questions fréquentes</h2>
+      <div class="flist">
+        <details>
+          <summary>Faut-il inclure ma résidence principale ?</summary>
+          <div class="fans">Oui. La résidence principale fait partie intégrante du patrimoine selon l'INSEE et la Banque de France. Elle représente d'ailleurs en moyenne <strong>60 % du patrimoine</strong> des Français propriétaires. Saisissez sa valeur de marché actuelle (pas son prix d'achat), puis déduisez le capital restant dû sur votre crédit immobilier.</div>
+        </details>
+        <details>
+          <summary>Comment estimer la valeur de mon bien immobilier ?</summary>
+          <div class="fans">Utilisez les outils gratuits comme MeilleursAgents, SeLoger Estimation, ou la base DVF du gouvernement (data.gouv.fr) pour comparer aux ventes réelles dans votre quartier. À défaut, prenez le prix d'achat ajusté de l'évolution du marché local.</div>
+        </details>
+        <details>
+          <summary>Et l'épargne salariale (PEE, PERCO, PER) ?</summary>
+          <div class="fans">À inclure dans la ligne "Placements financiers". Même si l'argent est bloqué jusqu'à un événement de déblocage, il fait partie de votre patrimoine net. Saisissez la valeur actuelle des fonds, pas le total de vos versements.</div>
+        </details>
+        <details>
+          <summary>Pourquoi comparer par âge plutôt qu'au global ?</summary>
+          <div class="fans">Parce que le patrimoine se construit avec le temps. Avoir 100 000 € à 25 ans est exceptionnel, mais ordinaire à 55 ans. Comparer par tranche d'âge donne une lecture beaucoup plus juste de votre position réelle.</div>
+        </details>
+        <details>
+          <summary>Comment fonctionne le calcul de mon rang exact ?</summary>
+          <div class="fans">Le calcul s'appuie sur les données INSEE de l'Enquête Patrimoine (médiane, moyenne, top 10 %, top 1 % par tranche d'âge), interpolées avec une distribution log-normale (modèle classique pour les distributions de richesse). Cela permet de calculer un percentile exact à partir de votre patrimoine et de votre âge.</div>
+        </details>
+        <details>
+          <summary>Et si j'ai un retard sur la médiane ?</summary>
+          <div class="fans">Pas de panique. Le patrimoine se construit sur des décennies. Ce qui compte, ce n'est pas où vous êtes, mais votre <strong>vitesse d'accumulation</strong> : votre taux d'épargne, vos placements, votre stratégie. Avec un taux d'épargne de 20 % bien investi, on rattrape rapidement le retard.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+(function(){
+  'use strict';
+
+  var btnCalculer=document.getElementById('mric-btn-calculer');
+  var resultsSection=document.getElementById('mric-results');
+
+  // INSEE-based data points (patrimoine net par âge en €) - approximations basées sur Enquête Patrimoine
+  // Format: age -> {median, p90 (top 10%), p99 (top 1%), mean}
+  var DATA={
+    25:{median:8000,p90:80000,p99:350000,mean:30000},
+    30:{median:35000,p90:230000,p99:780000,mean:100000},
+    35:{median:75000,p90:380000,p99:1200000,mean:165000},
+    40:{median:130000,p90:530000,p99:1700000,mean:230000},
+    45:{median:165000,p90:660000,p99:2000000,mean:285000},
+    50:{median:200000,p90:830000,p99:2300000,mean:355000},
+    55:{median:225000,p90:910000,p99:2500000,mean:380000},
+    60:{median:250000,p90:1000000,p99:2700000,mean:420000},
+    65:{median:240000,p90:1000000,p99:2700000,mean:415000},
+    70:{median:220000,p90:950000,p99:2500000,mean:390000},
+    75:{median:210000,p90:920000,p99:2400000,mean:375000},
+    80:{median:200000,p90:880000,p99:2200000,mean:360000}
+  };
+
+  function getStats(age){
+    if(age<=25)return DATA[25];
+    if(age>=80)return DATA[80];
+    var lower=Math.floor(age/5)*5;
+    var upper=lower+5;
+    if(!DATA[lower])lower=25;
+    if(!DATA[upper])upper=80;
+    var t=(age-lower)/(upper-lower);
+    var lo=DATA[lower],hi=DATA[upper];
+    return{
+      median:lo.median+(hi.median-lo.median)*t,
+      p90:lo.p90+(hi.p90-lo.p90)*t,
+      p99:lo.p99+(hi.p99-lo.p99)*t,
+      mean:lo.mean+(hi.mean-lo.mean)*t
+    };
+  }
+
+  // Normal CDF approximation
+  function normalCDF(z){
+    if(z<-6)return 0;if(z>6)return 1;
+    var t=1/(1+0.2316419*Math.abs(z));
+    var d=0.3989423*Math.exp(-z*z/2);
+    var p=d*t*(0.3193815+t*(-0.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));
+    return z>0?1-p:p;
+  }
+
+  // Calculate top X% from value using log-normal distribution
+  function getTopPct(value,stats){
+    if(value<=0)return 100;
+    var mu=Math.log(stats.median);
+    // Use p90 to derive sigma
+    var sigma=(Math.log(stats.p90)-mu)/1.2816; // z=1.2816 for 90th percentile
+    if(sigma<=0)sigma=0.5;
+    var z=(Math.log(value)-mu)/sigma;
+    var p=normalCDF(z); // P(X <= value)
+    var topPct=(1-p)*100;
+    return Math.max(0.01,Math.min(100,topPct));
+  }
+
+  // Inverse: get value at top X%
+  function getValueAtTopPct(topPct,stats){
+    var p=1-topPct/100;
+    // Inverse normal approximation (Beasley-Springer-Moro)
+    var z=invNorm(p);
+    var mu=Math.log(stats.median);
+    var sigma=(Math.log(stats.p90)-mu)/1.2816;
+    return Math.exp(mu+z*sigma);
+  }
+
+  function invNorm(p){
+    // Beasley-Springer-Moro
+    var a=[-3.969683028665376e1,2.209460984245205e2,-2.759285104469687e2,1.383577518672690e2,-3.066479806614716e1,2.506628277459239];
+    var b=[-5.447609879822406e1,1.615858368580409e2,-1.556989798598866e2,6.680131188771972e1,-1.328068155288572e1];
+    var c=[-7.784894002430293e-3,-3.223964580411365e-1,-2.400758277161838,-2.549732539343734,4.374664141464968,2.938163982698783];
+    var d=[7.784695709041462e-3,3.224671290700398e-1,2.445134137142996,3.754408661907416];
+    var pLow=0.02425,pHigh=1-pLow;
+    var q,r;
+    if(p<pLow){q=Math.sqrt(-2*Math.log(p));return(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);}
+    if(p<=pHigh){q=p-0.5;r=q*q;return(((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);}
+    q=Math.sqrt(-2*Math.log(1-p));return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+  }
+
+  // Find age where median = user's wealth
+  function getEquivalentAge(value){
+    if(value<=DATA[25].median)return 25;
+    if(value>=DATA[60].median)return 60;
+    for(var a=25;a<80;a++){
+      var s1=getStats(a),s2=getStats(a+1);
+      if(value>=s1.median&&value<=s2.median){
+        var t=(value-s1.median)/(s2.median-s1.median);
+        return a+t;
+      }
+    }
+    return 60;
+  }
+
+  function getLevel(topPct){
+    if(topPct<=1)return{emoji:'👑',name:'Légende',color:'#A855F7',desc:'Top 1 % — Vous êtes parmi <strong>l\'élite financière</strong> française. Moins d\'1 % de votre génération vous dépasse.'};
+    if(topPct<=5)return{emoji:'💎',name:'Diamant',color:'#00F5C0',desc:'Top 5 % — Vous êtes <strong>très loin devant</strong> la grande majorité des Français de votre âge.'};
+    if(topPct<=10)return{emoji:'⭐',name:'Platine',color:'#00F5C0',desc:'Top 10 % — Vous faites partie des <strong>10 % les plus aisés</strong> de votre génération.'};
+    if(topPct<=25)return{emoji:'🥇',name:'Or',color:'#FFD700',desc:'Top 25 % — Vous êtes <strong>au-dessus de la moyenne</strong>. Bonne trajectoire patrimoniale.'};
+    if(topPct<=50)return{emoji:'🥈',name:'Argent',color:'#C0C0C0',desc:'Top 50 % — Vous êtes <strong>au-dessus de la médiane</strong>. La majorité des Français de votre âge a moins.'};
+    return{emoji:'🥉',name:'Bronze',color:'#CD7F32',desc:'En-dessous de la médiane — c\'est <strong>le moment d\'agir</strong> : taux d\'épargne et investissement sont vos leviers.'};
+  }
+
+  function formatEuro(n){
+    return Math.round(n).toLocaleString('fr-FR',{style:'currency',currency:'EUR',minimumFractionDigits:0,maximumFractionDigits:0});
+  }
+  function formatCompact(n){
+    if(Math.abs(n)>=1e6)return(n/1e6).toFixed(1).replace('.',',')+' M€';
+    if(Math.abs(n)>=1e3)return(n/1e3).toFixed(0)+' k€';
+    return n.toFixed(0)+' €';
+  }
+  function formatPct(n){
+    if(n<0.1)return n.toFixed(2).replace('.',',')+' %';
+    if(n<1)return n.toFixed(1).replace('.',',')+' %';
+    return n.toFixed(1).replace('.',',')+' %';
+  }
+
+  // Position on distribution bar (0-100% from left): 0=bottom, 100=top
+  // Mapping topPct -> bar position : top 1% = 99%, top 10% = 85%, top 25% = 70%, top 50% = 50%, top 100% = 0%
+  function topPctToBarPos(topPct){
+    if(topPct>=100)return 0;
+    if(topPct<=1)return 99;
+    if(topPct<=5)return 90+(5-topPct)/(5-1)*9;
+    if(topPct<=10)return 80+(10-topPct)/(10-5)*10;
+    if(topPct<=25)return 65+(25-topPct)/(25-10)*15;
+    if(topPct<=50)return 45+(50-topPct)/(50-25)*20;
+    return 45*(1-(topPct-50)/50);
+  }
+
+  function drawChart(userAge,userValue){
+    var ctx=document.getElementById('mric-chart').getContext('2d');
+    var canvas=document.getElementById('mric-chart');
+    var dpr=window.devicePixelRatio||1;
+    var rect=canvas.getBoundingClientRect();
+    var h=240;
+    canvas.width=rect.width*dpr;
+    canvas.height=h*dpr;
+    ctx.scale(dpr,dpr);
+    var w=rect.width;
+    var pT=24,pB=44,pL=58,pR=20;
+    var pW=w-pL-pR,pH=h-pT-pB;
+    ctx.clearRect(0,0,w,h);
+
+    var ages=[25,30,35,40,45,50,55,60,65,70,75,80];
+    var maxV=DATA[60].p99*1.05;
+    var sX=pW/(ages.length-1);
+
+    // Grid
+    ctx.strokeStyle='rgba(255,255,255,0.05)';ctx.lineWidth=1;
+    for(var g=0;g<=4;g++){
+      var gy=pT+(pH/4)*g;
+      ctx.beginPath();ctx.moveTo(pL,gy);ctx.lineTo(w-pR,gy);ctx.stroke();
+      ctx.fillStyle='rgba(155,179,208,0.45)';ctx.textAlign='right';ctx.textBaseline='middle';
+      ctx.font='10px sans-serif';
+      ctx.fillText(formatCompact(maxV-(maxV/4)*g),pL-8,gy);
+    }
+
+    // X axis
+    for(var x=0;x<ages.length;x++){
+      ctx.fillStyle='rgba(155,179,208,0.45)';ctx.textAlign='center';ctx.textBaseline='top';
+      ctx.font='10px sans-serif';
+      ctx.fillText(ages[x]+' ans',pL+x*sX,h-pB+8);
+    }
+
+    // Curves
+    function drawCurve(key,color,lw,label){
+      ctx.beginPath();
+      ages.forEach(function(a,i){
+        var v=DATA[a][key];
+        var px=pL+i*sX,py=pT+pH-(v/maxV)*pH;
+        i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+      });
+      ctx.strokeStyle=color;ctx.lineWidth=lw;ctx.lineJoin='round';ctx.stroke();
+    }
+
+    // Fill under top 1% (faintly)
+    ctx.beginPath();
+    ages.forEach(function(a,i){
+      var v=DATA[a].p99;
+      var px=pL+i*sX,py=pT+pH-(v/maxV)*pH;
+      i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+    });
+    ctx.lineTo(pL+(ages.length-1)*sX,pT+pH);
+    ctx.lineTo(pL,pT+pH);ctx.closePath();
+    ctx.fillStyle='rgba(168,85,247,0.05)';ctx.fill();
+
+    drawCurve('p99','rgba(168,85,247,0.7)',2,'Top 1 %');
+    drawCurve('p90','rgba(0,245,192,0.7)',2,'Top 10 %');
+    drawCurve('mean','rgba(255,159,67,0.6)',1.5,'Moyenne');
+    drawCurve('median','rgba(255,255,255,0.85)',2,'Médiane');
+
+    // User point
+    var ageClamped=Math.max(25,Math.min(80,userAge));
+    var ux=pL+((ageClamped-25)/55)*pW;
+    var uy=pT+pH-Math.min(1,userValue/maxV)*pH;
+    ctx.beginPath();ctx.arc(ux,uy,7,0,Math.PI*2);
+    ctx.fillStyle='#00F5C0';ctx.fill();
+    ctx.strokeStyle='rgba(0,245,192,0.3)';ctx.lineWidth=8;ctx.stroke();
+    ctx.beginPath();ctx.arc(ux,uy,4,0,Math.PI*2);
+    ctx.fillStyle='#fff';ctx.fill();
+
+    // User label
+    ctx.fillStyle='#00F5C0';ctx.font='700 11px sans-serif';ctx.textAlign='center';ctx.textBaseline='bottom';
+    ctx.fillText('Vous',ux,uy-12);
+
+    // Legend
+    var legendY=pT-10;
+    var items=[
+      {label:'Top 1%',color:'rgba(168,85,247,0.9)'},
+      {label:'Top 10%',color:'rgba(0,245,192,0.9)'},
+      {label:'Moyenne',color:'rgba(255,159,67,0.8)'},
+      {label:'Médiane',color:'rgba(255,255,255,0.95)'}
+    ];
+    var lx=pL;
+    items.forEach(function(it){
+      ctx.fillStyle=it.color;
+      ctx.fillRect(lx,legendY-3,12,3);
+      ctx.fillStyle='rgba(197,213,232,0.7)';
+      ctx.font='600 10px sans-serif';ctx.textAlign='left';ctx.textBaseline='middle';
+      ctx.fillText(it.label,lx+16,legendY-1);
+      lx+=ctx.measureText(it.label).width+34;
+    });
+  }
+
+  function calculer(){
+    var age=Math.max(18,Math.min(90,parseFloat(document.getElementById('mric-age').value)||35));
+    var liquide=Math.max(0,parseFloat(document.getElementById('mric-liquide').value)||0);
+    var invest=Math.max(0,parseFloat(document.getElementById('mric-invest').value)||0);
+    var immo=Math.max(0,parseFloat(document.getElementById('mric-immo').value)||0);
+    var autres=Math.max(0,parseFloat(document.getElementById('mric-autres').value)||0);
+    var detteImmo=Math.max(0,parseFloat(document.getElementById('mric-dette-immo').value)||0);
+    var detteConso=Math.max(0,parseFloat(document.getElementById('mric-dette-conso').value)||0);
+
+    var financier=liquide+invest+autres;
+    var immoNet=Math.max(-1e9,immo-detteImmo);
+    var patrimoineNet=financier+immoNet-detteConso;
+
+    var stats=getStats(age);
+    var topPct=getTopPct(patrimoineNet,stats);
+    var level=getLevel(topPct);
+
+    // Niveau
+    document.getElementById('mric-level-emoji').textContent=level.emoji;
+    document.getElementById('mric-level-name').textContent=level.name;
+    document.getElementById('mric-level-name').style.color=level.color;
+    document.getElementById('mric-level-desc').innerHTML=level.desc;
+
+    // Stats principales
+    document.getElementById('mric-rang').textContent='Top '+formatPct(topPct);
+    document.getElementById('mric-patrimoine-net').textContent=formatEuro(patrimoineNet);
+    document.getElementById('mric-mediane').textContent=formatEuro(stats.median);
+    var ecart=patrimoineNet-stats.median;
+    var ecartEl=document.getElementById('mric-ecart-mediane');
+    ecartEl.textContent=(ecart>=0?'+':'')+formatEuro(ecart);
+    ecartEl.className='mric-stat-num '+(ecart>=0?'':'mric-orange');
+    if(ecart>=0)ecartEl.style.color='var(--teal)';else ecartEl.style.color='var(--orange)';
+
+    // Distribution bar marker
+    var pos=topPctToBarPos(topPct);
+    document.getElementById('mric-dist-marker').style.left=pos+'%';
+    document.getElementById('mric-dist-label').textContent='Vous · Top '+formatPct(topPct);
+
+    // Bar : composition (financier vs immo net)
+    var totalForBar=Math.max(1,Math.abs(financier)+Math.abs(immoNet));
+    var pV=financier/totalForBar*100;
+    var pI=immoNet/totalForBar*100;
+    if(pV<0)pV=0;if(pI<0)pI=0;
+    var sumBar=pV+pI;
+    if(sumBar>0){pV=pV/sumBar*100;pI=pI/sumBar*100}
+    document.getElementById('mric-bar-v').style.width=pV.toFixed(1)+'%';
+    document.getElementById('mric-bar-i').style.width=pI.toFixed(1)+'%';
+    document.getElementById('mric-pct-v').textContent=pV.toFixed(0)+'%';
+    document.getElementById('mric-pct-i').textContent=pI.toFixed(0)+'%';
+    document.getElementById('mric-legend-v').textContent=formatEuro(Math.max(0,financier));
+    document.getElementById('mric-legend-i').textContent=formatEuro(Math.max(0,immoNet));
+
+    // Compare block
+    var seuilTop10=stats.p90;
+    var seuilTop1=stats.p99;
+    var manqueTop10=Math.max(0,seuilTop10-patrimoineNet);
+    var manqueTop1=Math.max(0,seuilTop1-patrimoineNet);
+    document.getElementById('mric-cmp-top10').textContent=manqueTop10>0?'+'+formatEuro(manqueTop10):'Atteint ✓';
+    document.getElementById('mric-cmp-top1').textContent=manqueTop1>0?'+'+formatEuro(manqueTop1):'Atteint ✓';
+
+    var equivAge=getEquivalentAge(patrimoineNet);
+    var avance=equivAge-age;
+    var avanceEl=document.getElementById('mric-cmp-avance');
+    avanceEl.textContent=(avance>=0?'+':'')+Math.abs(avance).toFixed(1).replace('.',',')+' ans';
+    avanceEl.className='mric-compare-num '+(avance>=0?'mric-positive':'');
+
+    document.getElementById('mric-cmp-equiv').textContent=Math.round(equivAge)+' ans';
+
+    var avanceTxt=avance>=0?'<strong>'+avance.toFixed(1).replace('.',',')+' ans d\'avance</strong> sur la moyenne des Français':'<strong>'+Math.abs(avance).toFixed(1).replace('.',',')+' ans de retard</strong> sur la moyenne — rien d\'irrémédiable, mais c\'est le moment d\'agir';
+    document.getElementById('mric-compare-msg').innerHTML='Avec <strong>'+formatEuro(patrimoineNet)+'</strong>, votre patrimoine équivaut à celui d\'un Français médian de <strong>'+Math.round(equivAge)+' ans</strong>. Vous avez '+avanceTxt+'.';
+
+    // Table
+    var tableBody=document.getElementById('mric-table-body');
+    tableBody.innerHTML='';
+    [25,30,35,40,45,50,55,60,65,70,75,80].forEach(function(a){
+      var s=DATA[a];
+      var tr=document.createElement('tr');
+      var lower=Math.floor(age/5)*5;
+      if(a===lower)tr.className='mric-row-you';
+      tr.innerHTML='<td>'+a+(a===80?'+':'-'+(a+4))+' ans</td><td>'+formatEuro(s.median)+'</td><td>'+formatEuro(s.mean)+'</td><td>'+formatEuro(s.p90)+'</td><td>'+formatEuro(s.p99)+'</td>';
+      tableBody.appendChild(tr);
+    });
+
+    // Summary
+    var summaryEl=document.getElementById('mric-summary');
+    var avancePhrase=avance>=0?'Vous avez <strong style="color:var(--teal)">'+avance.toFixed(1).replace('.',',')+' ans d\'avance</strong>':'Vous avez <strong style="color:var(--orange)">'+Math.abs(avance).toFixed(1).replace('.',',')+' ans de retard</strong>';
+    summaryEl.innerHTML='Avec un patrimoine net de <strong>'+formatEuro(patrimoineNet)+'</strong> à <strong>'+age+' ans</strong>, vous êtes dans le <strong style="color:var(--teal)">top '+formatPct(topPct)+'</strong> des Français de votre génération. Niveau : <strong>'+level.emoji+' '+level.name+'</strong>. '+avancePhrase+' sur la moyenne. La médiane de votre tranche d\'âge est de <strong>'+formatEuro(stats.median)+'</strong>'+(manqueTop10>0?', et il vous manque <strong>'+formatEuro(manqueTop10)+'</strong> pour entrer dans le top 10 %.':' — vous êtes déjà dans le top 10 % !');
+
+    setTimeout(function(){drawChart(age,patrimoineNet)},250);
+
+    resultsSection.classList.add('mric-visible');
+    var anims=resultsSection.querySelectorAll('.mric-anim');
+    anims.forEach(function(el){el.style.animation='none';el.offsetHeight;el.style.animation=''});
+  }
+
+  // ===== Share buttons =====
+  var SHARE_URL=document.querySelector('.mric-calc').getAttribute('data-share-url')||window.location.href;
+  var SHARE_TITLE="Êtes-vous riche pour votre âge ? — MoneyRadar";
+  var SHARE_TEXT="Je viens de découvrir mon rang patrimonial parmi les Français de mon âge. Et toi ?";
+
+  function copyLink(){
+    var toast=document.getElementById('mric-toast');
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(SHARE_URL).then(function(){showToast(toast)}).catch(function(){fallbackCopy(toast)});
+    }else{fallbackCopy(toast)}
+  }
+  function fallbackCopy(toast){
+    var ta=document.createElement('textarea');ta.value=SHARE_URL;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');showToast(toast)}catch(e){}
+    document.body.removeChild(ta);
+  }
+  function showToast(toast){
+    toast.classList.add('mric-show');
+    setTimeout(function(){toast.classList.remove('mric-show')},2000);
+  }
+
+  function shareTo(platform){
+    var u=encodeURIComponent(SHARE_URL);
+    var t=encodeURIComponent(SHARE_TEXT+' '+SHARE_URL);
+    var urls={
+      twitter:'https://twitter.com/intent/tweet?url='+u+'&text='+encodeURIComponent(SHARE_TEXT),
+      facebook:'https://www.facebook.com/sharer/sharer.php?u='+u,
+      whatsapp:'https://wa.me/?text='+t,
+      linkedin:'https://www.linkedin.com/sharing/share-offsite/?url='+u,
+      telegram:'https://t.me/share/url?url='+u+'&text='+encodeURIComponent(SHARE_TEXT),
+      email:'mailto:?subject='+encodeURIComponent(SHARE_TITLE)+'&body='+t
+    };
+    if(urls[platform]){
+      if(platform==='email'){window.location.href=urls[platform]}
+      else{window.open(urls[platform],'_blank','noopener,width=600,height=500')}
+    }
+  }
+
+  function nativeShare(){
+    if(navigator.share){
+      navigator.share({title:SHARE_TITLE,text:SHARE_TEXT,url:SHARE_URL}).catch(function(){});
+    }
+  }
+
+  var nativeBtn=document.getElementById('mric-share-native');
+  var shareRow=document.getElementById('mric-share-row');
+  if(navigator.share){
+    nativeBtn.classList.add('mric-has-api');
+    shareRow.classList.add('mric-has-native');
+  }
+
+  nativeBtn.addEventListener('click',nativeShare);
+  document.querySelectorAll('.mric-share-btn[data-platform]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var p=this.getAttribute('data-platform');
+      if(p==='copy'){copyLink()}else{shareTo(p)}
+    });
+  });
+
+  var toggleBtn=document.getElementById('mric-toggle-table');
+  var tableContainer=document.getElementById('mric-table-container');
+  toggleBtn.addEventListener('click',function(){
+    var open=tableContainer.style.display==='block';
+    tableContainer.style.display=open?'none':'block';
+    toggleBtn.classList.toggle('mric-open',!open);
+    toggleBtn.querySelector('span').textContent=open?'Masquer':'Tableau';
+  });
+
+  var resizeTimer;
+  window.addEventListener('resize',function(){
+    clearTimeout(resizeTimer);
+    resizeTimer=setTimeout(function(){if(resultsSection.classList.contains('mric-visible'))calculer()},200);
+  });
+
+  var sectionObserver=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){entry.target.classList.add('mric-visible')}
+    });
+  },{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.mric-calc section').forEach(function(s){sectionObserver.observe(s)});
+
+  btnCalculer.addEventListener('click',calculer);
+  calculer();
+})();
+</script>
