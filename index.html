@@ -1,4 +1,5 @@
 <!-- Calculateur Êtes-vous riche pour votre âge ? — MoneyRadar -->
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 /* ===== CALCULATEUR RICHE POUR VOTRE ÂGE — MoneyRadar ===== */
@@ -170,8 +171,8 @@
 }
 .mric-calc .mric-level-emoji{font-size:64px;line-height:1;margin-bottom:10px;display:block}
 .mric-calc .mric-level-name{font-size:clamp(22px,2.5vw,32px);font-weight:800;color:var(--teal);letter-spacing:-.01em;margin-bottom:6px;line-height:1.1}
-.mric-calc .mric-level-desc{font-size:13px;color:var(--dsub);line-height:1.5}
-.mric-calc .mric-level-desc strong{color:#EFF4FF;font-weight:700}
+.mric-calc .mric-level-desc{font-size:14px;color:#fff;line-height:1.55;font-weight:500}
+.mric-calc .mric-level-desc strong{color:#fff;font-weight:700}
 
 /* Distribution bar */
 .mric-calc .mric-dist-section{margin-bottom:20px;padding:20px;border-radius:14px;background:rgba(11,17,32,0.6);border:1px solid var(--glass-border)}
@@ -205,14 +206,14 @@
 .mric-calc .mric-bar-track{display:flex;height:32px;background:rgba(11,17,32,0.6);border-radius:10px;overflow:hidden;border:1px solid var(--glass-border);box-shadow:inset 0 2px 6px rgba(0,0,0,0.2);}
 .mric-calc .mric-bar-fill{height:100%;display:flex;align-items:center;justify-content:center;transition:width .8s cubic-bezier(.34,1.56,.64,1);overflow:hidden;min-width:0}
 .mric-calc .mric-bar-v{background:linear-gradient(90deg,var(--teal),var(--blue));box-shadow:0 0 20px rgba(0,245,192,0.2)}
-.mric-calc .mric-bar-i{background:linear-gradient(90deg,#1A2847,#2A3F5C)}
+.mric-calc .mric-bar-i{background:linear-gradient(90deg,#4A6691,#6B89BF);box-shadow:0 0 16px rgba(107,137,191,0.18)}
 .mric-calc .mric-bar-pct{color:#fff;font-weight:800;font-size:11px;white-space:nowrap;padding:0 8px;letter-spacing:.02em;text-shadow:0 1px 2px rgba(0,0,0,0.3)}
 .mric-calc .mric-bar-legend{display:flex;gap:20px;margin-top:10px;flex-wrap:wrap}
-.mric-calc .mric-bar-legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--dsub)}
-.mric-calc .mric-bar-legend-item strong{color:#EFF4FF;font-size:13px;font-weight:700}
+.mric-calc .mric-bar-legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#EFF4FF;font-weight:600}
+.mric-calc .mric-bar-legend-item strong{color:#fff;font-size:13px;font-weight:700}
 .mric-calc .mric-ldot{width:8px;height:8px;border-radius:3px;flex-shrink:0}
 .mric-calc .mric-ldot-v{background:var(--teal);box-shadow:0 0 6px rgba(0,245,192,0.4)}
-.mric-calc .mric-ldot-i{background:#2A3F5C}
+.mric-calc .mric-ldot-i{background:#6B89BF;box-shadow:0 0 6px rgba(107,137,191,0.5)}
 
 /* Compare block (passer au niveau supérieur) */
 .mric-calc .mric-compare{margin-bottom:20px;padding:20px;border-radius:14px;background:rgba(255,159,67,0.04);border:1px solid rgba(255,159,67,0.15);position:relative;overflow:hidden;}
@@ -247,7 +248,7 @@
 
 /* Table */
 .mric-calc .mric-table-full{margin-top:0;padding:0 24px 32px}
-.mric-calc .mric-table-container{display:none}
+.mric-calc .mric-table-container{display:block}
 .mric-calc .mric-table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .mric-calc .mric-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
 .mric-calc .mric-table thead{background:rgba(11,17,32,0.8)}
@@ -426,16 +427,8 @@
   <section class="mric-hero">
     <div class="inn">
       <img src="https://moneyradar.org/lp4/wp-content/themes/astra-child/assets/images/moneyradar-logo.webp" alt="MoneyRadar" class="mric-hero-logo">
-      <h1>Êtes-vous <em>riche pour votre âge</em> ?</h1>
-      <p class="mric-hero-sub">Découvrez votre rang exact parmi les Français de votre génération. Saisissez votre âge et votre patrimoine, on vous dit dans quel <strong>top %</strong> vous vous situez, combien d'années d'avance ou de retard vous avez sur la moyenne, et combien il vous manque pour entrer dans le top 1 %.</p>
-    </div>
-  </section>
-
-  <!-- ===== COMMENT ÇA MARCHE ===== -->
-  <section class="mric-how">
-    <div class="inn" style="padding-top:40px;padding-bottom:40px">
-      <span class="lbl">Comment ça marche</span>
-      <p style="font-size:15px;color:var(--dsub);margin-bottom:0;line-height:1.65">Ce calculateur s'appuie sur les <strong style="color:#EFF4FF">données INSEE de l'Enquête Patrimoine</strong>, qui mesure la richesse réelle des ménages français. On compare votre <strong style="color:#EFF4FF">patrimoine net</strong> (actifs financiers + immobilier − dettes) à la distribution des Français de votre tranche d'âge, et on en déduit votre <strong style="color:var(--teal)">rang exact</strong>, votre niveau, et combien il vous reste pour passer au niveau supérieur.</p>
+      <h1>Êtes-vous <em>riche pour votre âge</em>&nbsp;?</h1>
+      <p class="mric-hero-sub">Découvrez votre rang exact parmi les Français de votre génération. Sur la base des <strong>données INSEE de l'Enquête Patrimoine</strong>, on compare votre <strong>patrimoine net</strong> (actifs financiers + immobilier − dettes) à la distribution de votre tranche d'âge, et on vous dit dans quel <strong>top %</strong> vous vous situez, combien d'années d'avance ou de retard vous avez, et combien il vous manque pour entrer dans le top 1&nbsp;%.</p>
     </div>
   </section>
 
@@ -462,7 +455,7 @@
               <label for="mric-situation">Situation</label>
               <div class="mric-input-wrap">
                 <select id="mric-situation">
-                  <option value="seul">Seul / célibataire</option>
+                  <option value="seul">Célibataire</option>
                   <option value="couple">En couple</option>
                 </select>
               </div>
@@ -531,10 +524,9 @@
         <div class="mric-results-col">
           <div class="mric-results" id="mric-results">
 
-            <!-- Niveau gamifié -->
+            <!-- Niveau : pourcentage en gros -->
             <div class="mric-level-card mric-anim">
-              <span class="mric-level-emoji" id="mric-level-emoji">🥈</span>
-              <div class="mric-level-name" id="mric-level-name">Argent</div>
+              <div class="mric-level-name" id="mric-level-name">Top —</div>
               <div class="mric-level-desc" id="mric-level-desc">Niveau de votre patrimoine</div>
             </div>
 
@@ -618,9 +610,9 @@
             <div class="mric-chart-wrap mric-anim mric-anim-d3">
               <div class="mric-chart-header">
                 <span class="mric-chart-title">Patrimoine par tranche d'âge en France</span>
-                <button class="mric-toggle" id="mric-toggle-table" type="button">
-                  <span>Tableau</span>
-                  <svg class="mric-chevron" width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <button class="mric-toggle" id="mric-chart-toggle" type="button">
+                  <span id="mric-chart-toggle-label">Masquer</span>
+                  <svg class="mric-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
               </div>
               <canvas id="mric-chart" height="240"></canvas>
@@ -1007,12 +999,12 @@
   }
 
   function getLevel(topPct){
-    if(topPct<=1)return{emoji:'👑',name:'Légende',color:'#A855F7',desc:'Top 1 % — Vous êtes parmi <strong>l\'élite financière</strong> française. Moins d\'1 % de votre génération vous dépasse.'};
-    if(topPct<=5)return{emoji:'💎',name:'Diamant',color:'#00F5C0',desc:'Top 5 % — Vous êtes <strong>très loin devant</strong> la grande majorité des Français de votre âge.'};
-    if(topPct<=10)return{emoji:'⭐',name:'Platine',color:'#00F5C0',desc:'Top 10 % — Vous faites partie des <strong>10 % les plus aisés</strong> de votre génération.'};
-    if(topPct<=25)return{emoji:'🥇',name:'Or',color:'#FFD700',desc:'Top 25 % — Vous êtes <strong>au-dessus de la moyenne</strong>. Bonne trajectoire patrimoniale.'};
-    if(topPct<=50)return{emoji:'🥈',name:'Argent',color:'#C0C0C0',desc:'Top 50 % — Vous êtes <strong>au-dessus de la médiane</strong>. La majorité des Français de votre âge a moins.'};
-    return{emoji:'🥉',name:'Bronze',color:'#CD7F32',desc:'En-dessous de la médiane — c\'est <strong>le moment d\'agir</strong> : taux d\'épargne et investissement sont vos leviers.'};
+    if(topPct<=1)return{emoji:'👑',name:'Légende',color:'#A855F7',desc:'Top 1 % : vous êtes parmi <strong>l\'élite financière</strong> française. Moins d\'1 % de votre génération vous dépasse.'};
+    if(topPct<=5)return{emoji:'💎',name:'Diamant',color:'#00F5C0',desc:'Top 5 % : vous êtes <strong>très loin devant</strong> la grande majorité des Français de votre âge.'};
+    if(topPct<=10)return{emoji:'⭐',name:'Platine',color:'#00F5C0',desc:'Top 10 % : vous faites partie des <strong>10 % les plus aisés</strong> de votre génération.'};
+    if(topPct<=25)return{emoji:'🥇',name:'Or',color:'#FFD700',desc:'Top 25 % : vous êtes <strong>au-dessus de la moyenne</strong>. Bonne trajectoire patrimoniale.'};
+    if(topPct<=50)return{emoji:'🥈',name:'Argent',color:'#C0C0C0',desc:'Top 50 % : vous êtes <strong>au-dessus de la médiane</strong>. La majorité des Français de votre âge a moins.'};
+    return{emoji:'🥉',name:'Bronze',color:'#CD7F32',desc:'En-dessous de la médiane, c\'est <strong>le moment d\'agir</strong> : taux d\'épargne et investissement sont vos leviers.'};
   }
 
   function formatEuro(n){
@@ -1153,10 +1145,10 @@
     var topPct=getTopPct(patrimoineNet,stats);
     var level=getLevel(topPct);
 
-    // Niveau
-    document.getElementById('mric-level-emoji').textContent=level.emoji;
-    document.getElementById('mric-level-name').textContent=level.name;
-    document.getElementById('mric-level-name').style.color=level.color;
+    // Niveau : afficher le pourcentage en gros (toujours en teal pour la lisibilité)
+    var levelNameEl=document.getElementById('mric-level-name');
+    levelNameEl.textContent='Top '+formatPct(topPct);
+    levelNameEl.style.color='';
     document.getElementById('mric-level-desc').innerHTML=level.desc;
 
     // Stats principales
@@ -1204,7 +1196,7 @@
 
     document.getElementById('mric-cmp-equiv').textContent=Math.round(equivAge)+' ans';
 
-    var avanceTxt=avance>=0?'<strong>'+avance.toFixed(1).replace('.',',')+' ans d\'avance</strong> sur la moyenne des Français':'<strong>'+Math.abs(avance).toFixed(1).replace('.',',')+' ans de retard</strong> sur la moyenne — rien d\'irrémédiable, mais c\'est le moment d\'agir';
+    var avanceTxt=avance>=0?'<strong>'+avance.toFixed(1).replace('.',',')+' ans d\'avance</strong> sur la moyenne des Français':'<strong>'+Math.abs(avance).toFixed(1).replace('.',',')+' ans de retard</strong> sur la moyenne : rien d\'irrémédiable, mais c\'est le moment d\'agir';
     document.getElementById('mric-compare-msg').innerHTML='Avec <strong>'+formatEuro(patrimoineNet)+'</strong>, votre patrimoine équivaut à celui d\'un Français médian de <strong>'+Math.round(equivAge)+' ans</strong>. Vous avez '+avanceTxt+'.';
 
     // Table
@@ -1222,7 +1214,7 @@
     // Summary
     var summaryEl=document.getElementById('mric-summary');
     var avancePhrase=avance>=0?'Vous avez <strong style="color:var(--teal)">'+avance.toFixed(1).replace('.',',')+' ans d\'avance</strong>':'Vous avez <strong style="color:var(--orange)">'+Math.abs(avance).toFixed(1).replace('.',',')+' ans de retard</strong>';
-    summaryEl.innerHTML='Avec un patrimoine net de <strong>'+formatEuro(patrimoineNet)+'</strong> à <strong>'+age+' ans</strong>, vous êtes dans le <strong style="color:var(--teal)">top '+formatPct(topPct)+'</strong> des Français de votre génération. Niveau : <strong>'+level.emoji+' '+level.name+'</strong>. '+avancePhrase+' sur la moyenne. La médiane de votre tranche d\'âge est de <strong>'+formatEuro(stats.median)+'</strong>'+(manqueTop10>0?', et il vous manque <strong>'+formatEuro(manqueTop10)+'</strong> pour entrer dans le top 10 %.':' — vous êtes déjà dans le top 10 % !');
+    summaryEl.innerHTML='Avec un patrimoine net de <strong>'+formatEuro(patrimoineNet)+'</strong> à <strong>'+age+' ans</strong>, vous êtes dans le <strong style="color:var(--teal)">top '+formatPct(topPct)+'</strong> des Français de votre génération. Niveau : <strong>'+level.emoji+' '+level.name+'</strong>. '+avancePhrase+' sur la moyenne. La médiane de votre tranche d\'âge est de <strong>'+formatEuro(stats.median)+'</strong>'+(manqueTop10>0?', et il vous manque <strong>'+formatEuro(manqueTop10)+'</strong> pour entrer dans le top 10 %.':'. Vous êtes déjà dans le top 10 % !');
 
     setTimeout(function(){drawChart(age,patrimoineNet)},250);
 
@@ -1291,14 +1283,27 @@
     });
   });
 
-  var toggleBtn=document.getElementById('mric-toggle-table');
-  var tableContainer=document.getElementById('mric-table-container');
-  toggleBtn.addEventListener('click',function(){
-    var open=tableContainer.style.display==='block';
-    tableContainer.style.display=open?'none':'block';
-    toggleBtn.classList.toggle('mric-open',!open);
-    toggleBtn.querySelector('span').textContent=open?'Masquer':'Tableau';
-  });
+  // Toggle chart visibility
+  var chartToggleBtn=document.getElementById('mric-chart-toggle');
+  var chartCanvas=document.getElementById('mric-chart');
+  var chartToggleLabel=document.getElementById('mric-chart-toggle-label');
+  if(chartToggleBtn){
+    chartToggleBtn.addEventListener('click',function(){
+      var hidden=chartCanvas.style.display==='none';
+      if(hidden){
+        chartCanvas.style.display='';
+        chartToggleLabel.textContent='Masquer';
+        chartToggleBtn.classList.remove('mric-open');
+        var ageNow=Math.max(18,Math.min(90,parseFloat(document.getElementById('mric-age').value)||35));
+        var pnNow=(parseFloat(document.getElementById('mric-liquide').value)||0)+(parseFloat(document.getElementById('mric-invest').value)||0)+(parseFloat(document.getElementById('mric-immo').value)||0)+(parseFloat(document.getElementById('mric-autres').value)||0)-(parseFloat(document.getElementById('mric-dette-immo').value)||0)-(parseFloat(document.getElementById('mric-dette-conso').value)||0);
+        setTimeout(function(){drawChart(ageNow,pnNow)},50);
+      }else{
+        chartCanvas.style.display='none';
+        chartToggleLabel.textContent='Afficher';
+        chartToggleBtn.classList.add('mric-open');
+      }
+    });
+  }
 
   var resizeTimer;
   window.addEventListener('resize',function(){
