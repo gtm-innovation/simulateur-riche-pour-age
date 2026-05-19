@@ -130,26 +130,38 @@
 .mric-calc .mric-results{display:none;max-width:100%}
 .mric-calc .mric-results.mric-visible{display:block}
 
-/* Stats row */
-.mric-calc .mric-stats-row{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:20px}
-.mric-calc .mric-stat{
+/* Bloc résultat unifié (niveau + 4 stats dans un seul conteneur) */
+.mric-calc .mric-result-block{
+  margin-bottom:20px;
+  border-radius:16px;
   background:rgba(11,17,32,0.6);
-  border:1px solid var(--glass-border);border-radius:14px;
-  padding:20px 16px;text-align:center;
+  border:1px solid var(--glass-border);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  transition:all .3s cubic-bezier(.4,0,.2,1);
   position:relative;overflow:hidden;
 }
-.mric-calc .mric-stat::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;
-  background:radial-gradient(ellipse at 50% 0%, rgba(0,245,192,0.03) 0%, transparent 70%);pointer-events:none;opacity:0;
-  transition:opacity .3s}
-.mric-calc .mric-stat:hover::before{opacity:1}
-.mric-calc .mric-stat:hover{border-color:rgba(0,245,192,0.12);transform:translateY(-2px);box-shadow:var(--glow)}
-.mric-calc .mric-stat.mric-primary{border-color:rgba(0,245,192,0.15)}
-.mric-calc .mric-stat.mric-primary::after{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+.mric-calc .mric-result-block::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
   background:linear-gradient(90deg,var(--teal),var(--blue),var(--teal));
   background-size:200% auto;animation:mric-shimmer 3s linear infinite;
+}
+
+/* Stats row */
+.mric-calc .mric-stats-row{display:grid;grid-template-columns:1fr;gap:0}
+.mric-calc .mric-result-block .mric-stats-row{
+  border-top:1px solid var(--glass-border);
+}
+.mric-calc .mric-stat{
+  padding:20px 16px;text-align:center;
+  position:relative;
+}
+.mric-calc .mric-result-block .mric-stat + .mric-stat{
+  border-left:1px solid var(--glass-border);
+}
+@media (max-width:540px){
+  .mric-calc .mric-result-block .mric-stats-row.mric-4{grid-template-columns:1fr 1fr}
+  .mric-calc .mric-result-block .mric-stat + .mric-stat{border-left:1px solid var(--glass-border)}
+  .mric-calc .mric-result-block .mric-stats-row.mric-4 .mric-stat:nth-child(2n+1){border-left:none}
+  .mric-calc .mric-result-block .mric-stats-row.mric-4 .mric-stat:nth-child(n+3){border-top:1px solid var(--glass-border)}
 }
 .mric-calc .mric-stat-num{font-size:clamp(14px,1.8vw,22px);font-weight:800;color:var(--teal);line-height:1.2;margin-bottom:6px;overflow-wrap:anywhere;word-break:break-word}
 .mric-calc .mric-stat-num.mric-white{color:#EFF4FF;font-size:clamp(13px,1.6vw,20px)}
@@ -157,21 +169,14 @@
 .mric-calc .mric-stat-num.mric-gold{color:var(--gold)}
 .mric-calc .mric-stat-lbl{font-size:10px;color:rgba(197,213,232,0.6);letter-spacing:.08em;text-transform:uppercase;font-weight:700}
 
-/* Level badge */
+/* Level badge (à l'intérieur du bloc unifié) */
 .mric-calc .mric-level-card{
-  margin-bottom:20px;padding:24px;border-radius:16px;text-align:center;
-  background:rgba(11,17,32,0.6);border:1px solid var(--glass-border);
-  position:relative;overflow:hidden;
-  transition:all .3s cubic-bezier(.4,0,.2,1);
-}
-.mric-calc .mric-level-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--teal),var(--blue),var(--teal));
-  background-size:200% auto;animation:mric-shimmer 3s linear infinite;
+  padding:28px 24px 24px;text-align:center;
+  position:relative;
 }
 .mric-calc .mric-level-emoji{font-size:64px;line-height:1;margin-bottom:10px;display:block}
-.mric-calc .mric-level-name{font-size:clamp(22px,2.5vw,32px);font-weight:800;color:var(--teal);letter-spacing:-.01em;margin-bottom:6px;line-height:1.1}
-.mric-calc .mric-level-desc{font-size:14px;color:#fff;line-height:1.55;font-weight:500}
+.mric-calc .mric-level-name{font-size:clamp(28px,3.2vw,40px);font-weight:800;color:var(--teal);letter-spacing:-.01em;margin-bottom:10px;line-height:1.1}
+.mric-calc .mric-level-desc{font-size:14px;color:#fff;line-height:1.55;font-weight:500;max-width:520px;margin:0 auto}
 .mric-calc .mric-level-desc strong{color:#fff;font-weight:700}
 
 /* Distribution bar */
@@ -524,29 +529,29 @@
         <div class="mric-results-col">
           <div class="mric-results" id="mric-results">
 
-            <!-- Niveau : pourcentage en gros -->
-            <div class="mric-level-card mric-anim">
-              <div class="mric-level-name" id="mric-level-name">Top —</div>
-              <div class="mric-level-desc" id="mric-level-desc">Niveau de votre patrimoine</div>
-            </div>
-
-            <!-- Stats principales -->
-            <div class="mric-stats-row mric-4">
-              <div class="mric-stat mric-primary mric-anim">
-                <div class="mric-stat-num" id="mric-rang">—</div>
-                <div class="mric-stat-lbl">Votre rang</div>
+            <!-- Bloc résultat unifié : niveau + 4 stats -->
+            <div class="mric-result-block mric-anim">
+              <div class="mric-level-card">
+                <div class="mric-level-name" id="mric-level-name">Top —</div>
+                <div class="mric-level-desc" id="mric-level-desc">Niveau de votre patrimoine</div>
               </div>
-              <div class="mric-stat mric-anim mric-anim-d1">
-                <div class="mric-stat-num mric-white" id="mric-patrimoine-net">—</div>
-                <div class="mric-stat-lbl">Votre patrimoine net</div>
-              </div>
-              <div class="mric-stat mric-anim mric-anim-d1">
-                <div class="mric-stat-num mric-white" id="mric-mediane">—</div>
-                <div class="mric-stat-lbl">Médiane de votre âge</div>
-              </div>
-              <div class="mric-stat mric-anim mric-anim-d2">
-                <div class="mric-stat-num" id="mric-ecart-mediane">—</div>
-                <div class="mric-stat-lbl">Écart vs médiane</div>
+              <div class="mric-stats-row mric-4">
+                <div class="mric-stat mric-primary">
+                  <div class="mric-stat-num" id="mric-rang">—</div>
+                  <div class="mric-stat-lbl">Votre rang</div>
+                </div>
+                <div class="mric-stat">
+                  <div class="mric-stat-num mric-white" id="mric-patrimoine-net">—</div>
+                  <div class="mric-stat-lbl">Votre patrimoine net</div>
+                </div>
+                <div class="mric-stat">
+                  <div class="mric-stat-num mric-white" id="mric-mediane">—</div>
+                  <div class="mric-stat-lbl">Médiane de votre âge</div>
+                </div>
+                <div class="mric-stat">
+                  <div class="mric-stat-num" id="mric-ecart-mediane">—</div>
+                  <div class="mric-stat-lbl">Écart vs médiane</div>
+                </div>
               </div>
             </div>
 
