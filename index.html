@@ -174,7 +174,6 @@
   padding:28px 24px 24px;text-align:center;
   position:relative;
 }
-.mric-calc .mric-level-emoji{font-size:64px;line-height:1;margin-bottom:10px;display:block}
 .mric-calc .mric-level-name{font-size:clamp(28px,3.2vw,40px);font-weight:800;color:var(--teal);letter-spacing:-.01em;margin-bottom:10px;line-height:1.1}
 .mric-calc .mric-level-desc{font-size:14px;color:#fff;line-height:1.55;font-weight:500;max-width:520px;margin:0 auto}
 .mric-calc .mric-level-desc strong{color:#fff;font-weight:700}
@@ -433,7 +432,7 @@
     <div class="inn">
       <img src="https://moneyradar.org/lp4/wp-content/themes/astra-child/assets/images/moneyradar-logo.webp" alt="MoneyRadar" class="mric-hero-logo">
       <h1>Êtes-vous <em>riche pour votre âge</em>&nbsp;?</h1>
-      <p class="mric-hero-sub">Découvrez votre rang exact parmi les Français de votre génération. Sur la base des <strong>données INSEE de l'Enquête Patrimoine</strong>, on compare votre <strong>patrimoine net</strong> (actifs financiers + immobilier − dettes) à la distribution de votre tranche d'âge, et on vous dit dans quel <strong>top %</strong> vous vous situez, combien d'années d'avance ou de retard vous avez, et combien il vous manque pour entrer dans le top 1&nbsp;%.</p>
+      <p class="mric-hero-sub">Découvrez votre rang exact parmi les Français de votre génération. Sur la base des <strong>données INSEE de l'Enquête Patrimoine</strong>, on compare votre <strong>patrimoine net</strong> (tous vos actifs moins toutes vos dettes) à la distribution de votre tranche d'âge, et on vous dit dans quel <strong>top %</strong> vous vous situez, combien d'années d'avance ou de retard vous avez, et combien il vous manque pour entrer dans le top 1&nbsp;%.</p>
     </div>
   </section>
 
@@ -999,12 +998,12 @@
   }
 
   function getLevel(topPct){
-    if(topPct<=1)return{emoji:'👑',name:'Légende',color:'#A855F7',desc:'Vous êtes parmi <strong>l\'élite financière</strong> française. Moins d\'1 % de votre génération vous dépasse.'};
-    if(topPct<=5)return{emoji:'💎',name:'Diamant',color:'#00F5C0',desc:'Vous êtes <strong>très loin devant</strong> la grande majorité des Français de votre âge.'};
-    if(topPct<=10)return{emoji:'⭐',name:'Platine',color:'#00F5C0',desc:'Vous faites partie des <strong>10 % les plus aisés</strong> de votre génération.'};
-    if(topPct<=25)return{emoji:'🥇',name:'Or',color:'#FFD700',desc:'Vous êtes <strong>au-dessus de la moyenne</strong>. Bonne trajectoire patrimoniale.'};
-    if(topPct<=50)return{emoji:'🥈',name:'Argent',color:'#C0C0C0',desc:'Vous êtes <strong>au-dessus de la médiane</strong>. La majorité des Français de votre âge a moins.'};
-    return{emoji:'🥉',name:'Bronze',color:'#CD7F32',desc:'En-dessous de la médiane, c\'est <strong>le moment d\'agir</strong> : taux d\'épargne et investissement sont vos leviers.'};
+    if(topPct<=1)return{desc:'Vous êtes parmi <strong>l\'élite financière</strong> française. Moins d\'1 % de votre génération vous dépasse.'};
+    if(topPct<=5)return{desc:'Vous êtes <strong>très loin devant</strong> la grande majorité des Français de votre âge.'};
+    if(topPct<=10)return{desc:'Vous faites partie des <strong>10 % les plus aisés</strong> de votre génération.'};
+    if(topPct<=25)return{desc:'Vous êtes <strong>au-dessus de la moyenne</strong>. Bonne trajectoire patrimoniale.'};
+    if(topPct<=50)return{desc:'Vous êtes <strong>au-dessus de la médiane</strong>. La majorité des Français de votre âge a moins.'};
+    return{desc:'En-dessous de la médiane, c\'est <strong>le moment d\'agir</strong> : taux d\'épargne et investissement sont vos leviers.'};
   }
 
   function formatEuro(n){
@@ -1151,10 +1150,8 @@
     var topPct=getTopPct(patrimoineNet,stats);
     var level=getLevel(topPct);
 
-    // Niveau : afficher le pourcentage en gros (toujours en teal pour la lisibilité)
-    var levelNameEl=document.getElementById('mric-level-name');
-    levelNameEl.textContent='Top '+formatPct(topPct);
-    levelNameEl.style.color='';
+    // Niveau : pourcentage en gros + description contextuelle
+    document.getElementById('mric-level-name').textContent='Top '+formatPct(topPct);
     document.getElementById('mric-level-desc').innerHTML=level.desc;
 
     // Stats principales
@@ -1203,7 +1200,7 @@
 
     document.getElementById('mric-cmp-equiv').textContent=Math.round(equivAge)+' ans';
 
-    var avanceTxt=avance>=0?'<strong>'+avance.toFixed(1).replace('.',',')+' ans d\'avance</strong> sur la moyenne des Français':'<strong>'+Math.abs(avance).toFixed(1).replace('.',',')+' ans de retard</strong> sur la moyenne : rien d\'irrémédiable, mais c\'est le moment d\'agir';
+    var avanceTxt=avance>=0?'<strong>'+avance.toFixed(1).replace('.',',')+' ans d\'avance</strong> sur la trajectoire médiane':'<strong>'+Math.abs(avance).toFixed(1).replace('.',',')+' ans de retard</strong> sur la trajectoire médiane : rien d\'irrémédiable, mais c\'est le moment d\'agir';
     var coupleNote=(situation==='couple')?' (votre foyer pèse <strong>'+formatEuro(patrimoineFoyer)+'</strong>, ajusté à 1,5 UC pour comparer équitablement)':'';
     document.getElementById('mric-compare-msg').innerHTML='Avec <strong>'+formatEuro(patrimoineNet)+'</strong>'+coupleNote+', votre patrimoine équivaut à celui d\'un Français médian de <strong>'+Math.round(equivAge)+' ans</strong>. Vous avez '+avanceTxt+'.';
 
@@ -1222,7 +1219,7 @@
     // Summary
     var summaryEl=document.getElementById('mric-summary');
     var avancePhrase=avance>=0?'Vous avez <strong style="color:var(--teal)">'+avance.toFixed(1).replace('.',',')+' ans d\'avance</strong>':'Vous avez <strong style="color:var(--orange)">'+Math.abs(avance).toFixed(1).replace('.',',')+' ans de retard</strong>';
-    summaryEl.innerHTML='Avec un patrimoine net de <strong>'+formatEuro(patrimoineNet)+'</strong> à <strong>'+age+' ans</strong>, vous êtes dans le <strong style="color:var(--teal)">top '+formatPct(topPct)+'</strong> des Français de votre génération. Niveau : <strong>'+level.emoji+' '+level.name+'</strong>. '+avancePhrase+' sur la moyenne. La médiane de votre tranche d\'âge est de <strong>'+formatEuro(stats.median)+'</strong>'+(manqueTop10>0?', et il vous manque <strong>'+formatEuro(manqueTop10)+'</strong> pour entrer dans le top 10 %.':'. Vous êtes déjà dans le top 10 % !');
+    summaryEl.innerHTML='Avec un patrimoine net de <strong>'+formatEuro(patrimoineNet)+'</strong> à <strong>'+age+' ans</strong>, vous êtes dans le <strong style="color:var(--teal)">top '+formatPct(topPct)+'</strong> des Français de votre génération. '+avancePhrase+' sur la trajectoire médiane. La médiane de votre tranche d\'âge est de <strong>'+formatEuro(stats.median)+'</strong>'+(manqueTop10>0?', et il vous manque <strong>'+formatEuro(manqueTop10)+'</strong> pour entrer dans le top 10 %.':'. Vous êtes déjà dans le top 10 % !');
 
     setTimeout(function(){drawChart(age,patrimoineNet)},250);
 
